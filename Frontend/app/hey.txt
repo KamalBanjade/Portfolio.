@@ -1,0 +1,54 @@
+// MainPage.tsx
+import React, { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
+import LoadingIndicator from './LoadingIndicator'; // Adjust the path as necessary
+
+const MainPage: FC = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay for demonstration purposes
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  function scrollToSection(sectionId: string) {
+    const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const sectionTop = section.offsetTop - navbarHeight;
+      const scrollOptions: ScrollToOptions = {
+        top: sectionTop,
+        behavior: 'smooth'
+      };
+      const delay = 60;
+      setTimeout(() => {
+        window.scrollTo(scrollOptions);
+      }, delay);
+    }
+  }
+
+  return (
+    <div className="bg-[#0a192f] min-h-screen flex flex-col text-white relative">
+      {loading && <LoadingIndicator />}
+
+      <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800">
+        <Link href="#" passHref>
+          <span onClick={() => scrollToSection('home')} className="flex w-full items-center py-2 text-lg font-semibold text-[#ccd6f6] hover:text-[#64ffda]">
+            <HomeIcon className="h-6 w-6 text-[#ccd6f6] hover:text-[#64ffda]" />
+          </span>
+        </Link>
+        {/* Rest of your navigation code */}
+      </nav>
+
+      {/* Rest of your content */}
+    </div>
+  );
+};
+
+export default MainPage;
