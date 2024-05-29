@@ -5,7 +5,9 @@ const Skills: React.FC = () => {
           <section className="flex flex-col sm:flex-row justify-center items-start space-y-6 sm:space-y-0 sm:space-x-6 md:space-x-8">
             <div className="flex-1">
               <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-left">
+              <div className='text-center sm:text-left'>
                 <span className="text-white">Skills</span>
+                </div>
               </h2>
               <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
                 <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32]">

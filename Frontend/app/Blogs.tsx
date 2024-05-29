@@ -29,7 +29,9 @@ const Blogs: React.FC = () => {
             <section className="flex flex-col sm:flex-row justify-center items-start space-y-6 sm:space-y-0 sm:space-x-6 md:space-x-8">
                 <div className="flex-1">
                     <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
+                    <div className='text-center sm:text-left'>
                         <span className="text-white">Blogs</span>
+                        </div>
                     </h2>
                     <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
                         Explore a curated collection of my favorite poems.

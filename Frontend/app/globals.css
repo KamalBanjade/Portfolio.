@@ -7,7 +7,7 @@
 }
 
 .sticky-image {
-  @apply sticky top-0; /* Ensure the image sticks to the top of the container */
+  @apply sticky top-8; /* Tailwind utilities for sticky positioning and top offset */
 }
 
 @media (max-width: 640px) {
@@ -18,6 +18,7 @@
   .sticky-image {
     @apply mt-4 w-48 h-48; /* Adjust image size for small screens */
     position: static; /* Disable sticky behavior on small screens */
+    top: 8;
   }
 }
 

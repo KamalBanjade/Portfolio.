@@ -9,6 +9,8 @@ import Gallery from "./Gallery";
 import Skills from "./Skills";
 import Blogs from "./Blogs";
 import Projects from "./Project";
+import GetInTouch from './contact';
+
 
 const scrollbarStyles = `
 ::-webkit-scrollbar {
@@ -51,9 +53,14 @@ export default function Component() {
         <div>
           <Blogs />
         </div>
-        <div className="h-20" />
+        <div className="h-20 md:h-16" />
+        
         <div>
           <Projects />
+        </div>
+        <div className="h-20 " />
+        <div >
+          <GetInTouch/>
         </div>
         <div className="h-20" />
       </div>

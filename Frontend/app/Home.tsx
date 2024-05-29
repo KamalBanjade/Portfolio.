@@ -36,7 +36,7 @@ const Home: React.FC = () => {
                         View Projects
                     </button>
                 </Link>
-                <button className="bg-transparent hover:bg-white hover:text-teal-500 text-white font-semibold py-3 px-6 rounded-md border border-white transition duration-300">
+                <button onClick={() => scrollToSection('contact me')} className="bg-transparent hover:bg-white hover:text-teal-500 text-white font-semibold py-3 px-6 rounded-md border border-white transition duration-300">
                     Contact Me
                 </button>
             </div>
