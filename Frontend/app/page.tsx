@@ -10,6 +10,7 @@ import Skills from "./Skills";
 import Blogs from "./Blogs";
 import Projects from "./Project";
 import GetInTouch from './contact';
+import Footer from './footer';
 
 
 const scrollbarStyles = `
@@ -63,6 +64,9 @@ export default function Component() {
           <GetInTouch/>
         </div>
         <div className="h-20" />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div >
   )

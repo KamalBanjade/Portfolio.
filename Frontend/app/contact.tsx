@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { FaTwitter } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const GetInTouch: React.FC = () => {
   return (
@@ -24,7 +24,8 @@ const GetInTouch: React.FC = () => {
                   <FaInstagram size={32} />
                 </a>
                 <a href="https://twitter.com/kamalbanjade20" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="transform transition duration-300 ease-in-out hover:scale-125 hover:text-[#64ffda] text-white">
-                  <FaTwitter size={32} />
+                  <FaXTwitter size={32} />
+                
                 </a>
                 <a href="https://linkedin.com/in/kamal-banjade-554198254" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transform transition duration-300 ease-in-out hover:scale-125 hover:text-[#64ffda] text-white">
                   <FaLinkedin size={32} />
