@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaInstagram, FaLinkedin, FaReddit } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
 const GetInTouch: React.FC = () => {
@@ -30,6 +30,9 @@ const GetInTouch: React.FC = () => {
                 <a href="https://linkedin.com/in/kamal-banjade-554198254" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transform transition duration-300 ease-in-out hover:scale-125 hover:text-[#64ffda] text-white">
                   <FaLinkedin size={32} />
                 </a>
+                {/* <a href="https://reddit.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transform transition duration-300 ease-in-out hover:scale-125 hover:text-[#64ffda] text-white">
+                  <FaReddit size={32} />
+                </a> */}
               </div>
             </div>
           </div>
