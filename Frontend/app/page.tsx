@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loader from './loader';
 import Navbar from './navbar';
 import Home from "./Home";
@@ -25,12 +25,16 @@ const scrollbarStyles = `
 `;
 
 export default function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }, []);
+
   return (
     <div key="1" className="bg-[#0a192f] min-h-screen flex flex-col text-white">
       <style jsx>{scrollbarStyles}</style>
-        <div>
-            <Loader />
-        </div>
+      <div>
+        <Loader />
+      </div>
       <div>
         <Navbar />
         <div className="h-12 md:h-16" />
@@ -45,7 +49,7 @@ export default function App() {
         <div><Blogs /></div>
         <div className="h-20 md:h-16" />
         <div><Projects /></div>
-        <div className="h-20 " />
+        <div className="h-20 md:h-16" />
         <div><GetInTouch /></div>
         <div><Footer /></div>
       </div>
