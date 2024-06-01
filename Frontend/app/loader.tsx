@@ -85,10 +85,11 @@ const Loader: React.FC = () => {
             <text
               x="50"
               y="50"
+              fontSize="35px"
               textAnchor="middle"
               alignmentBaseline="middle"
               fill="#64ffda"
-              className="text-4xl font-bold opacity-0 animate-fade-in"
+              className=" font-bold opacity-0 animate-fade-in"
             >
               <animate attributeName="opacity" from="0" to="1" dur="1s" begin="line5.end" fill="freeze" />
               K

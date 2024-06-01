@@ -24,9 +24,37 @@ const scrollbarStyles = `
 }                         
 `;
 
+const sectionsToObserve = ['projects','contact'];
+
 export default function App() {
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top of the page
+    const handleScroll = () => {
+      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+      const windowScrollY = window.scrollY;
+  
+      for (let sectionId of sectionsToObserve) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+              const sectionTop = section.offsetTop - navbarHeight;
+              const sectionHeight = section.offsetHeight;
+  
+              if (windowScrollY >= sectionTop && windowScrollY < sectionTop + sectionHeight) {
+                  console.log("Currently in view:", sectionId);
+                  window.history.replaceState(null, '', `#${sectionId}`);
+                  break;
+              }
+          }
+      }
+  };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); 
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); 
+    };
+  }, [sectionsToObserve]);
+  useEffect(() => {
+    window.scrollTo(0, 0); 
   }, []);
 
   return (
@@ -38,20 +66,20 @@ export default function App() {
       <div>
         <Navbar />
         <div className="h-12 md:h-16" />
-        <div><Home /></div>
+        <section><Home /></section>
         <div className="h-20 md:h-16" />
-        <div><About /></div>
+        <section><About /></section>
         <div className="h-20 md:h-16" />
-        <div><Gallery /></div>
+        <section ><Gallery /></section>
         <div className="h-20 md:h-16" />
-        <div><Skills /></div>
+        <section><Skills /></section>
         <div className="h-20 md:h-16" />
-        <div><Blogs /></div>
+        <section><Blogs /></section>
         <div className="h-20 md:h-16" />
-        <div><Projects /></div>
+        <section><Projects /></section>
         <div className="h-20 md:h-16" />
-        <div><GetInTouch /></div>
-        <div><Footer /></div>
+        <section><GetInTouch /></section>
+        <div className="fade-in"><Footer /></div>
       </div>
     </div>
   );

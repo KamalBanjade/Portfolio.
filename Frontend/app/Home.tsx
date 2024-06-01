@@ -42,7 +42,7 @@ const Home: React.FC = () => {
                     </Link>
                     <Link href="#contact" passHref>
                         <button
-                            onClick={() => scrollToSection('contact me')}
+                            onClick={() => scrollToSection('contact')}
                             className="bg-transparent hover:bg-white hover:text-teal-500 text-white font-semibold py-3 px-6 rounded-md border border-white transition duration-300"
                             style={{ width: '156px', height: '50px' }}
                         >
