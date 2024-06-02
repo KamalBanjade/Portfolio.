@@ -14,6 +14,7 @@ import Footer from './footer';
 const scrollbarStyles = `
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px; /* Add height for horizontal scrollbar */
 }
 ::-webkit-scrollbar-track {
   background: #0a192f; 
@@ -21,8 +22,9 @@ const scrollbarStyles = `
 ::-webkit-scrollbar-thumb {
   background: #64ffda; 
   border-radius: 3px;                                   
-}                         
+}
 `;
+
 
 const sectionsToObserve = ['projects','contact'];
 
