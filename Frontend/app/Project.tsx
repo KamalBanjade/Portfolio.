@@ -69,23 +69,23 @@ const Projects: React.FC = () => {
                         <div className="flex sm:flex-col space-x-4 sm:space-x-0 sm:space-y-2 overflow-x-auto sm:overflow-x-hidden">
                             {/* Map through projects to create buttons */}
                             {projects.map((project) => (
-                             <button
-                             key={project.id}
-                             className={`w-full sm:w-auto text-left px-2 sm:px-4 py-1 sm:py-2 rounded-md transition-colors duration-300 ease-in-out transform ${activeProject === project.id
-                                 ? "bg-teal-500 text-white scale-105"
-                                 : "bg-transparent text-gray-300 hover:bg-white hover:text-teal-600 hover:scale-105"
-                                 }`}
-                             onClick={() => setActiveProject(project.id)}
-                             style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', transition: 'background-color 0.3s' }}
-                         >
-                             <div className="flex items-center justify-between">
-                                 <span className="text-sm sm:text-base">{project.id}. {project.title}</span>
-                                 <span className="ml-2 text-base sm:text-xl">
-                                     {/* No arrow icon for large screens */}
-                                 </span>
-                             </div>
-                         </button>
-                         
+                                <button
+                                    key={project.id}
+                                    className={`w-full sm:w-auto text-left px-2 sm:px-4 py-1 sm:py-2 rounded-md transition-colors duration-300 ease-in-out transform ${activeProject === project.id
+                                        ? "bg-teal-500 text-white scale-105"
+                                        : "bg-transparent text-gray-300 hover:bg-white hover:text-teal-600 hover:scale-105"
+                                        }`}
+                                    onClick={() => setActiveProject(project.id)}
+                                    style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', transition: 'background-color 0.3s' }}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-sm sm:text-base">{project.id}. {project.title}</span>
+                                        <span className="ml-2 text-base sm:text-xl">
+                                            {/* No arrow icon for large screens */}
+                                        </span>
+                                    </div>
+                                </button>
+
 
                             ))}
                         </div>
@@ -129,10 +129,11 @@ const Projects: React.FC = () => {
 
                                             {/* Buttons */}
                                             <div className="flex flex-col sm:flex-row justify-center sm:justify-between space-y-4 sm:space-y-0 sm:space-x-0 w-full mt-4">
-                                                <button className="bg-gradient-to-r from-teal-400 to-blue-500 text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 hover:from-teal-500 hover:to-blue-600 shadow-md flex items-center justify-center space-x-2">
+                                                <button className="bg-gradient-to-r from-[#64ffda] to-[#1a2f4f] text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 hover:from-[#52d4bb] hover:to-[#112240] shadow-md flex items-center justify-center space-x-2">
                                                     <FaExternalLinkAlt />
                                                     <span>View Project</span>
                                                 </button>
+
                                                 <button className="bg-transparent hover:bg-teal-500 text-teal-500 hover:text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-teal-500 transition duration-300 shadow-md flex items-center justify-center space-x-2 sm:ml-auto">
                                                     <FaGithub />
                                                     <span>GitHub</span>
