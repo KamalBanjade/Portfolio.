@@ -76,8 +76,8 @@ const Skills: React.FC = () => {
                     </h2>
                     <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32]">
-                            <h3 className="text-[#64ffda] text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Front-End <FaLaptopCode className="text-[#64ffda] hover:text-green-500 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
+                            <h3 className="text-[#64ffda] text-sm sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
+                                Front-End <FaLaptopCode className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
                             </h3>
                             <ul className="list-disc pl-4 text-sm md:text-base lg:text-base text-[#8892b0]">
                                 <li>HTML5</li>
@@ -88,8 +88,8 @@ const Skills: React.FC = () => {
                             </ul>
                         </div>
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32]">
-                            <h3 className="text-[#64ffda] text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Back-End <FaServer className="text-[#64ffda] hover:text-green-500 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
+                        <h3 className="text-[#64ffda] text-sm sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
+                                Back-End <FaServer className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
                             </h3>
                             <ul className="list-disc pl-4 text-sm md:text-base lg:text-base text-[#8892b0]">
                                 <li>Node.js</li>
@@ -100,8 +100,8 @@ const Skills: React.FC = () => {
                             </ul>
                         </div>
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32]">
-                            <h3 className="text-[#64ffda] text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Tools <FaTools className="text-[#64ffda] hover:text-green-500 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
+                        <h3 className="text-[#64ffda] text-sm sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
+                                Tools <FaTools className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
                             </h3>
                             <ul className="list-disc pl-4 text-sm md:text-base lg:text-base text-[#8892b0]">
                                 <li>Git</li>

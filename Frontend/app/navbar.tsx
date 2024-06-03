@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { FaBars } from 'react-icons/fa';
 import Cookies from '@/components/js-cookie';
 
-
 const Navbar: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('home');
     const sections = ['about', 'gallery', 'skills', 'blogs'];
@@ -39,7 +38,7 @@ const Navbar: React.FC = () => {
 
             let foundActiveSection = false;
 
-            for (let sectionId of sections) {
+            for (const sectionId of sections) {
                 const section = document.getElementById(sectionId);
                 if (section) {
                     const sectionTop = section.offsetTop - navbarHeight;
@@ -79,34 +78,39 @@ const Navbar: React.FC = () => {
                     className="home-button"
                     onClick={(event) => {
                         if (event.detail === 1) {
-
                             scrollToSection('homeButton');
                         } else if (event.detail === 2) {
-
                             window.location.reload();
                         }
                     }}
                 >
                     <span
-                        className={`flex w-full items-center py-2 text-lg font-semibold ${activeSection === 'home' ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda]`}
+                        className={`flex w-full items-center py-2 text-lg font-semibold ${activeSection === 'home' ? 'text-[#64ffda]' : 'text-[#ccd6f6]'}`}
                     >
-                        <svg className="w-8 h-8" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <polygon points="50,10 85,32 85,68 50,90 15,68 15,32" fill="none" stroke={activeSection === 'home' ? '#64ffda' : '#ccd6f6'} strokeWidth="5" />
-                            <text x="50" y="53" textAnchor="middle" alignmentBaseline="middle" fill={activeSection === 'home' ? '#64ffda' : '#ccd6f6'} fontSize="30px" fontWeight="bold">
+                        <svg className="w-8 h-8 hex-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon className="hexagon" points="50,10 85,32 85,68 50,90 15,68 15,32" fill="none" stroke={activeSection === 'home' ? '#64ffda' : '#ccd6f6'} strokeWidth="5" />
+                            <text className="hex-text" x="50" y="53" textAnchor="middle" alignmentBaseline="middle" fill={activeSection === 'home' ? '#64ffda' : '#ccd6f6'} fontSize="30px" fontWeight="bold">
                                 K
                             </text>
                         </svg>
                     </span>
                 </button>
             </Link>
-
+            <style jsx>{`
+                .home-button .hex-svg:hover .hexagon {
+                    stroke: #64ffda !important;
+                }
+                .home-button .hex-svg:hover .hex-text {
+                    fill: #64ffda !important;
+                }
+            `}</style>
 
             <div className="hidden md:flex items-center space-x-4 md:space-x-6 lg:space-x-8">
                 {sections.map(sectionId => (
                     <Link key={sectionId} href={`#${sectionId}`} passHref>
                         <span
                             onClick={() => scrollToSection(sectionId)}
-                            className={`flex w-full items-center py-2 text-lg font-semibold ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda]`}
+                            className={`flex w-full items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda]`}
                         >
                             {sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}
                         </span>
@@ -126,13 +130,13 @@ const Navbar: React.FC = () => {
                     </Button>
                 </SheetTrigger>
 
-                <SheetContent className="bg-[#0a192f]">
+                <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out">
                     <div className="grid gap-2 py-4">
                         {sections.map(sectionId => (
                             <Link key={sectionId} href={`#${sectionId}`} passHref>
                                 <span
                                     onClick={() => scrollToSection(sectionId)}
-                                    className={`flex w-full items-center py-2 text-lg font-semibold ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda] text-left`}
+                                    className={`flex w-full items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda] text-left`}
                                     style={{ textAlign: 'left' }}
                                 >
                                     {sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}

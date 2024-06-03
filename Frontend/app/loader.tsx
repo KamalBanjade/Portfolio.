@@ -84,8 +84,8 @@ const Loader: React.FC = () => {
             </polygon>
             <text
               x="50"
-              y="50"
-              fontSize="35px"
+              y="53"
+              fontSize="30px"
               textAnchor="middle"
               alignmentBaseline="middle"
               fill="#64ffda"
