@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useModal } from '@/components/ui/modalcontext';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 import Modal from '@/components/ui/modal';
+import { BsCardImage } from 'react-icons/bs';
 
 interface Slide {
   images: {
@@ -16,6 +17,7 @@ const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState('');
+  const [showOverlay, setShowOverlay] = useState(true);
 
   const slides: Slide[] = [
     {
@@ -46,7 +48,6 @@ const Gallery: React.FC = () => {
         { src: '/Butterfly.jpg', title: 'Butterfly', description: 'Arghakhanchi, Arghatosh' }
       ]
     }
-    
   ];
 
   const handlePrevious = () => {
@@ -84,35 +85,51 @@ const Gallery: React.FC = () => {
     openModal();
   };
 
-  const renderGridItems = () => (
-    <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4">
-      {slides[currentIndex].images.map((image, index) => (
-        <div className="relative group" key={index}>
-          <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
-            <img
-              src={image.src}
-              alt={`Image ${index + 1}`}
-              className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
-              <h3 className="text-white text-sm font-semibold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                {image.title}
-              </h3>
-              <p className="text-gray-400 text-xs line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-                {image.description}
-              </p>
-              <button
-                onClick={() => handleEyeClick(index)}
-                className="absolute top-2 right-2 bg-transparent text-white rounded-full p-1 hover:bg-gray-600 focus:outline-none"
-              >
-                <AiOutlineEye className="text-base sm:text-lg hover:text-teal-600" />
-              </button>
-            </div>
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        handlePrevious();
+      } else if (event.key === 'ArrowRight') {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isAnimating, currentIndex]);
+// Inside the renderGridItems function
+const renderGridItems = () => (
+  <div className={`grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
+    {slides[currentIndex].images.map((image, index) => (
+      <div className="relative group" key={index}>
+        <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+          <img
+            src={image.src}
+            alt={`Image ${index + 1}`}
+            className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
+            <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
+              {image.title}
+            </h3>
+            <p className="text-gray-400 text-xs sm:text-sm line-clamp-2 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
+              {image.description}
+            </p>
+            <button
+              onClick={() => handleEyeClick(index)}
+              className="absolute top-2 right-2 bg-transparent text-white rounded-full p-1 hover:bg-gray-600 focus:outline-none"
+            >
+              <AiOutlineEye className="text-base sm:text-lg hover:text-teal-600" />
+            </button>
           </div>
         </div>
-      ))}
-    </div>
-  );
+      </div>
+    ))}
+  </div>
+);
 
   return (
     <div className="relative" id="gallery">
@@ -133,37 +150,55 @@ const Gallery: React.FC = () => {
             </p>
 
             <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
-              <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentIndex * 100}%)`, opacity: isAnimating ? 0.5 : 1 }}>
-                {slides.map((slide, index) => (
-                  <div key={index} className="w-full flex-shrink-0">
-                    {renderGridItems()}
-                  </div>
-                ))}
-              </div>
-              <button
-                onClick={handlePrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105"
-              >
-                <AiOutlineLeft className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600" />
-              </button>
-              <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105"
-              >
-                <AiOutlineRight className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600" />
-              </button>
-
-
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 mb-0 flex space-x-2">
-                {slides.map((_, index) => (
+              {showOverlay && (
+                <div className="absolute inset-0 flex justify-center items-center z-20">
                   <button
-                    key={index}
-                    onClick={() => handleIndicatorClick(index)}
-                    className={`w-2 h-2 sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3 rounded-full ${currentIndex === index ? 'bg-[#64ffda]' : 'bg-gray-500'} transition-colors duration-300 ease-in-out`}
-                  />
-                ))}
+                    onClick={() => setShowOverlay(!showOverlay)}
+                    className="bg-transparent"
+                  >
+                    < BsCardImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105" />
+                  </button>
+                </div>
+              )}
+              <div className="relative">
+                {showOverlay && (
+                  <div className="absolute inset-0 bg-[#0a192f] bg-opacity-90 pointer-events-none z-10"></div>
+                )}
+                <div className={`flex transition-transform duration-500 ease-in-out ${showOverlay ? 'pointer-events-none' : ''}`} style={{ transform: `translateX(-${currentIndex * 100}%)`, opacity: isAnimating ? 0.5 : 1 }}>
+                  {slides.map((slide, index) => (
+                    <div key={index} className="w-full flex-shrink-0">
+                      {renderGridItems()}
+                    </div>
+                  ))}
+                </div>
               </div>
+              {!showOverlay && (
+                <>
+                  <button
+                    onClick={handlePrevious}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105 z-20"
+                  >
+                    <AiOutlineLeft className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600" />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105 z-20"
+                  >
+                    <AiOutlineRight className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600" />
+                  </button>
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 mb-0 flex space-x-2 z-20">
+                    {slides.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleIndicatorClick(index)}
+                        className={`w-2 h-2 sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3 rounded-full ${currentIndex === index ? 'bg-[#64ffda]' : 'bg-gray-500'} transition-colors duration-300 ease-in-out`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
+
           </div>
         </section>
       </div>
@@ -173,4 +208,3 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
-  
