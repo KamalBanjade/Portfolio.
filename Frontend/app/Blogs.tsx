@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const Blogs: React.FC = () => {
     const [expandedBlog, setExpandedBlog] = useState<number | null>(null);
+    const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const toggleExpand = (blogId: number) => {
         setExpandedBlog(expandedBlog === blogId ? null : blogId);
@@ -15,6 +16,22 @@ const Blogs: React.FC = () => {
         }
         return lines.slice(0, 8).join('\n') + '...';
     };
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (expandedBlog !== null) {
+            const currentRef = sectionRefs.current[expandedBlog];
+            if (currentRef && !currentRef.contains(event.target as Node)) {
+                setExpandedBlog(null);
+            }
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [expandedBlog]);
 
     const blogs = [
         {
@@ -123,7 +140,13 @@ I'll overcome obstacles, shining bright.`
                     <div className="h-6" />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                         {blogs.map(blog => (
-                            <div key={blog.id} className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[21rem] sm:h-[24rem] lg:h-[26rem]'} sm:mx-8 lg:mx-auto max-w-md`}>
+                            <div
+                                key={blog.id}
+                                ref={el => {
+                                    sectionRefs.current[blog.id] = el;
+                                }}
+                                className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[21rem] sm:h-[24rem] lg:h-[26rem]'} sm:mx-8 lg:mx-auto max-w-md`}
+                            >
                                 <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
                                 <div className="text-[#ccd6f6] pb-10">
                                     <p className="text-sm mb-4" style={{ whiteSpace: 'pre-line' }}>

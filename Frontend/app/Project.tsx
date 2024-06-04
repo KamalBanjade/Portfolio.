@@ -71,9 +71,9 @@ const Projects: React.FC = () => {
                             {projects.map((project) => (
                                 <button
                                     key={project.id}
-                                    className={`w-full sm:w-auto text-left px-2 sm:px-4 py-1 sm:py-2 rounded-md transition-colors duration-300 ease-in-out transform ${activeProject === project.id
-                                        ? "bg-teal-500 text-white scale-105"
-                                        : "bg-transparent text-gray-300 hover:bg-white hover:text-teal-600 hover:scale-105"
+                                    className={`w-full sm:w-auto text-left px-2 sm:px-4 py-1 sm:py-2 rounded-md transition-colors duration-300  ease-in-out transform ${activeProject === project.id
+                                        ? "bg-teal-500 text-white transform:scale-105"
+                                        : "bg-transparent text-gray-300 hover:bg-white  hover:text-teal-600 hover:scale-105"
                                         }`}
                                     onClick={() => setActiveProject(project.id)}
                                     style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', transition: 'background-color 0.3s' }}
@@ -92,7 +92,7 @@ const Projects: React.FC = () => {
                     </div>
 
                     {/* Project Details */}
-                    <div className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto lg:ml-20 lg:w-4/5 lg:h-auto sm:w-full sm:mt-4">
+                    <div className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto lg:ml-20 lg:w-4/5 lg:h-auto sm:w-full sm:mt-4  relative transition duration-500 ease-in-out transform md:hover:scale-105 lg:hover:scale-105 hover:translate-y-1 bg-gray-transparent rounded-lg">
                         <div className="max-w-3xl mx-auto">
                             {/* Map through projects to display project details */}
                             {projects.map((project) => (
@@ -107,7 +107,7 @@ const Projects: React.FC = () => {
                                         />
 
                                         {/* Project Description */}
-                                        <div className="flex-1 text-center sm:text-left">
+                                        <div className="flex-1 text-center sm:text-left ">
                                             <h3 className="text-[#64ffda] text-lg sm:text-xl md:text-xl lg:text-xl font-bold mb-4">{project.title}</h3>
                                             <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-base mb-4 sm:mb-12 ${expandedProject === project.id ? '' : 'line-clamp-3'}`}>
                                                 {project.description}
@@ -129,15 +129,16 @@ const Projects: React.FC = () => {
 
                                             {/* Buttons */}
                                             <div className="flex flex-col sm:flex-row justify-center sm:justify-between space-y-4 sm:space-y-0 sm:space-x-0 w-full mt-4">
-                                                <button className="bg-gradient-to-r from-[#64ffda] to-[#1a2f4f] text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 hover:from-[#52d4bb] hover:to-[#112240] shadow-md flex items-center justify-center space-x-2">
+                                                <button className="bg-gradient-to-r from-[#64ffda] to-[#1a2f4f] text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2">
                                                     <FaExternalLinkAlt />
                                                     <span>View Project</span>
                                                 </button>
 
-                                                <button className="bg-transparent hover:bg-teal-500 text-teal-500 hover:text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-teal-500 transition duration-300 shadow-md flex items-center justify-center space-x-2 sm:ml-auto">
+                                                <button className="bg-transparent hover:bg-teal-500 text-teal-500 hover:text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-teal-500 transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2 sm:ml-auto">
                                                     <FaGithub />
                                                     <span>GitHub</span>
                                                 </button>
+
                                             </div>
                                         </div>
                                     </div>

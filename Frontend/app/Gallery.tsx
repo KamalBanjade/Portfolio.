@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useModal } from '@/components/ui/modalcontext';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
+import Modal from '@/components/ui/modal';
 
 interface Slide {
   images: {
@@ -9,53 +10,6 @@ interface Slide {
     description: string;
   }[];
 }
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  imageSrc: string;
-}
-
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
-  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    if (isOpen) {
-      const img = new Image();
-      img.src = imageSrc;
-      img.onload = () => {
-        const maxWidth = window.innerWidth * 0.6;
-        const maxHeight = window.innerHeight * 0.6;
-        let { width, height } = img;
-
-        if (width > maxWidth) {
-          height = (maxWidth / width) * height;
-          width = maxWidth;
-        }
-        if (height > maxHeight) {
-          width = (maxHeight / height) * width;
-          height = maxHeight;
-        }
-
-        setImageDimensions({ width, height });
-      };
-    }
-  }, [isOpen, imageSrc]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="relative bg-transparent shadow-lg" style={{ width: imageDimensions.width, height: imageDimensions.height }}>
-        <button onClick={onClose} className="absolute top-2 right-2 text-white bg-gray-800 rounded-full p-1 hover:bg-teal-600 focus:outline-none transition-colors duration-300 flex items-center justify-center">
-          <AiOutlineClose className="text-xl sm:text-2xl" />
-          <span className="sr-only">Close</span>
-        </button>
-        <img src={imageSrc} alt="Modal view" className="w-full h-full object-contain rounded-lg" />
-      </div>
-    </div>
-  );
-};
 
 const Gallery: React.FC = () => {
   const { openModal, closeModal, isModalOpen } = useModal();
@@ -165,7 +119,7 @@ const Gallery: React.FC = () => {
       <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`} >
         <style jsx>{`
           .blur {
-            filter: blur(8px);
+            filter: blur(10px);
             transition: filter 0.3s ease;
           }
         `}</style>
@@ -219,3 +173,4 @@ const Gallery: React.FC = () => {
 };
 
 export default Gallery;
+  

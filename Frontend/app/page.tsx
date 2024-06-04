@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ModalProvider, useModal } from '@/components/ui/modalcontext';
 import Loader from './loader';
 import Navbar from './navbar';
@@ -30,6 +30,20 @@ const sectionsToObserve = ['projects', 'contact'];
 
 const App: React.FC = () => {
   const { isModalOpen, closeModal } = useModal();
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sectionRef.current && !sectionRef.current.contains(event.target as Node)) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [closeModal]);
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -79,12 +93,10 @@ const App: React.FC = () => {
   return (
     <div key="1" className="bg-[#0a192f] min-h-screen flex flex-col text-white">
       <style jsx>{scrollbarStyles}</style>
-      <div>
+      <div ref={sectionRef}>
         <Loader />
-      </div>
-      <div>
         <Navbar />
-        <div className="h-12 md:h-16" />
+        <div className="h-20 md:h-16" />
         <section><Home /></section>
         <div className="h-20 md:h-16" />
         <section><About /></section>

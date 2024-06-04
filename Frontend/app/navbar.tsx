@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
     }, [activeSection]);
 
     return (
-        <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800/50 dark:shadow-gray-800">
+        <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800/50 dark:shadow-gray-800 ">
             <Link href="#home" passHref>
                 <button
                     id="homeButton"
@@ -117,7 +117,7 @@ const Navbar: React.FC = () => {
                         </span>
                     </Link>
                 ))}
-                <button className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300">
+                <button className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105">
                     Resume
                 </button>
             </div>
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
                                 </span>
                             </Link>
                         ))}
-                        <button className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300">
+                        <button className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105">
                             Resume
                         </button>
                     </div>
