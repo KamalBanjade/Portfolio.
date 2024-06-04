@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect } from 'react';
+import { ModalProvider, useModal } from '@/components/ui/modalcontext';
 import Loader from './loader';
 import Navbar from './navbar';
 import Home from "./Home";
@@ -14,7 +15,7 @@ import Footer from './footer';
 const scrollbarStyles = `
 ::-webkit-scrollbar {
   width: 6px;
-  height: 6px; /* Add height for horizontal scrollbar */
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #0a192f; 
@@ -25,38 +26,54 @@ const scrollbarStyles = `
 }
 `;
 
+const sectionsToObserve = ['projects', 'contact'];
 
-const sectionsToObserve = ['projects','contact'];
+const App: React.FC = () => {
+  const { isModalOpen, closeModal } = useModal();
 
-export default function App() {
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isModalOpen) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [isModalOpen, closeModal]);
+
   useEffect(() => {
     const handleScroll = () => {
       const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
       const windowScrollY = window.scrollY;
   
       for (let sectionId of sectionsToObserve) {
-          const section = document.getElementById(sectionId);
-          if (section) {
-              const sectionTop = section.offsetTop - navbarHeight;
-              const sectionHeight = section.offsetHeight;
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop - navbarHeight;
+          const sectionHeight = section.offsetHeight;
   
-              if (windowScrollY >= sectionTop && windowScrollY < sectionTop + sectionHeight) {
-                  console.log("Currently in view:", sectionId);
-                  window.history.replaceState(null, '', `#${sectionId}`);
-                  break;
-              }
+          if (windowScrollY >= sectionTop && windowScrollY < sectionTop + sectionHeight) {
+            console.log("Currently in view:", sectionId);
+            window.history.replaceState(null, '', `#${sectionId}`);
+            break;
           }
+        }
       }
-  };
+    };
+
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); 
+    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll); 
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [sectionsToObserve]);
+
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -72,7 +89,7 @@ export default function App() {
         <div className="h-20 md:h-16" />
         <section><About /></section>
         <div className="h-20 md:h-16" />
-        <section ><Gallery /></section>
+        <section><Gallery /></section>
         <div className="h-20 md:h-16" />
         <section><Skills /></section>
         <div className="h-20 md:h-16" />
@@ -85,4 +102,14 @@ export default function App() {
       </div>
     </div>
   );
-}
+};
+
+const WrappedApp: React.FC = () => {
+  return (
+    <ModalProvider>
+      <App />
+    </ModalProvider>
+  );
+};
+
+export default WrappedApp;

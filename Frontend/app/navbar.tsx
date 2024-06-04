@@ -76,6 +76,7 @@ const Navbar: React.FC = () => {
                 <button
                     id="homeButton"
                     className="home-button"
+                    title="Home"
                     onClick={(event) => {
                         if (event.detail === 1) {
                             scrollToSection('homeButton');
