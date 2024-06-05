@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useModal } from '@/components/ui/modalcontext';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 import Modal from '@/components/ui/modal';
@@ -18,6 +18,7 @@ const Gallery: React.FC = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState('');
   const [showOverlay, setShowOverlay] = useState(true);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   const slides: Slide[] = [
     {
@@ -37,7 +38,9 @@ const Gallery: React.FC = () => {
     {
       images: [
         { src: '/parrot.jpg', title: 'A parrot', description: 'Lalitpur, Godawari' },
-        { src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh' },
+        {
+          src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'
+        },
         { src: '/woods.jpeg', title: "Nature's Roof", description: 'Arghakhanchi, Arghatosh' }
       ]
     },
@@ -53,7 +56,7 @@ const Gallery: React.FC = () => {
   const handlePrevious = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setCurrentIndex((prevIndex) => (prevIndex === 0 ? prevIndex : prevIndex - 1));
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
       setTimeout(() => {
         setIsAnimating(false);
       }, 700);
@@ -63,7 +66,7 @@ const Gallery: React.FC = () => {
   const handleNext = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? prevIndex : prevIndex + 1));
+      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
       setTimeout(() => {
         setIsAnimating(false);
       }, 700);
@@ -94,46 +97,57 @@ const Gallery: React.FC = () => {
       }
     };
 
+    const handleScroll = () => {
+      if (galleryRef.current) {
+        const rect = galleryRef.current.getBoundingClientRect();
+        if (rect.top >= window.innerHeight || rect.bottom <= 0) {
+          setShowOverlay(true);
+        }
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [isAnimating, currentIndex]);
-// Inside the renderGridItems function
-const renderGridItems = () => (
-  <div className={`grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
-    {slides[currentIndex].images.map((image, index) => (
-      <div className="relative group" key={index}>
-        <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
-          <img
-            src={image.src}
-            alt={`Image ${index + 1}`}
-            className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
-            <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
-              {image.title}
-            </h3>
-            <p className="text-gray-400 text-xs sm:text-sm line-clamp-2 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
-              {image.description}
-            </p>
-            <button
-              onClick={() => handleEyeClick(index)}
-              className="absolute top-2 right-2 bg-transparent text-white rounded-full p-1 hover:bg-gray-600 focus:outline-none"
-            >
-              <AiOutlineEye className="text-base sm:text-lg hover:text-teal-600" />
-            </button>
+
+  const renderGridItems = () => (
+    <div className={`grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
+      {slides[currentIndex].images.map((image, index) => (
+        <div className="relative group" key={index}>
+          <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+            <img
+              src={image.src}
+              alt={`Image ${index + 1}`}
+              className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
+              <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
+                {image.title}
+              </h3>
+              <p className="text-gray-400 text-xs sm:text-sm line-clamp-2 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
+                {image.description}
+              </p>
+              <button
+                onClick={() => handleEyeClick(index)}
+                className="absolute top-2 right-2 bg-transparent text-white rounded-full p-1 hover:bg-gray-600 focus:outline-none"
+              >
+                <AiOutlineEye className="text-base sm:text-lg hover:text-teal-600" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
 
   return (
-    <div className="relative" id="gallery">
-      <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`} >
+    <div className="relative" id="gallery" ref={galleryRef}>
+      <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`}>
         <style jsx>{`
           .blur {
             filter: blur(10px);
@@ -151,14 +165,12 @@ const renderGridItems = () => (
 
             <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
               {showOverlay && (
-                <div className="absolute inset-0 flex justify-center items-center z-20">
-                  <button
-                    onClick={() => setShowOverlay(!showOverlay)}
-                    className="bg-transparent"
-                  >
-                    < BsCardImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105" />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setShowOverlay(!showOverlay)}
+                  className="absolute inset-0 flex justify-center items-center z-20 bg-transparent"
+                >
+                  <BsCardImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105" />
+                </button>
               )}
               <div className="relative">
                 {showOverlay && (
