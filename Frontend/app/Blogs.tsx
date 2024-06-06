@@ -17,26 +17,23 @@ const Blogs: React.FC = () => {
         return lines.slice(0, 8).join('\n') + '...';
     };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (expandedBlog !== null) {
-            const currentRef = sectionRefs.current[expandedBlog];
-            if (currentRef && !currentRef.contains(event.target as Node)) {
-                setExpandedBlog(null);
-            }
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            setExpandedBlog(null);
         }
     };
 
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', handleKeyDown);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleKeyDown);
         };
     }, [expandedBlog]);
 
     const blogs = [
         {
             id: 1,
-            title: 'Sunset',
+            title: 'The Duality of Twilight',
             description: `As the day gently fades with whispered sighs,
 And the sky in evening's colors lies,
 Some find solace in twilight's warm embrace,
@@ -145,14 +142,15 @@ I'll overcome obstacles, shining bright.`
                                 ref={el => {
                                     sectionRefs.current[blog.id] = el;
                                 }}
-                                className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[21rem] sm:h-[24rem] lg:h-[26rem]'} sm:mx-8 lg:mx-auto max-w-md`}
+                                onClick={() => toggleExpand(blog.id)}
+                                className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-2xl relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} sm:mx-4 lg:mx-auto max-w-md my-4 `}
                             >
                                 <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
                                 <div className="text-[#ccd6f6] pb-10">
                                     <p className="text-sm mb-4" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateText(blog.description, expandedBlog === blog.id)}
                                     </p>
-                                    <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer" onClick={() => toggleExpand(blog.id)}>
+                                    <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
                                         <span className="text-[#64ffda] mb-1 text-xs">
                                             {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
                                         </span>

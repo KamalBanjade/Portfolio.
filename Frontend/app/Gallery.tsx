@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useModal } from '@/components/ui/modalcontext';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 import Modal from '@/components/ui/modal';
-import { BsCardImage } from 'react-icons/bs';
+import { BiImage } from 'react-icons/bi';
 
 interface Slide {
   images: {
@@ -19,44 +19,88 @@ const Gallery: React.FC = () => {
   const [modalImageSrc, setModalImageSrc] = useState('');
   const [showOverlay, setShowOverlay] = useState(true);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const [slides, setSlides] = useState<Slide[]>([]);
 
-  const slides: Slide[] = [
+  const bigScreenSlides: Slide[] = [
     {
       images: [
-        { src: '/sunset.jpg', title: 'Sunset', description: 'Lalitpur, Kathford College' },
-        { src: '/stupa.jpg', title: 'Boudhanath Stupa', description: 'Kathmandu,Boudha ' },
-        { src: '/mountains.png', title: 'Mountains', description: 'Arghakhanchi, Arghatosh' }
+        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight' },
+        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies ' },
+        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light" }
       ]
     },
     {
       images: [
-        { src: '/lights.jpg', title: 'Rainy Street Lights', description: 'Kathmandu, New Baneshwor' },
-        { src: '/bulbs.png', title: 'Paper Lanterns', description: 'Butwal, View Complex' },
-        { src: '/apartments.png', title: 'Apartments', description: 'Lalitpur, Kathdord ollege' }
+        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns' },
+        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
+        { src: '/traffic.png', title: 'Apartments', description: 'Lalitpur, Kathdord ollege' }
       ]
     },
     {
       images: [
-        { src: '/parrot.jpg', title: 'A parrot', description: 'Lalitpur, Godawari' },
-        {
-          src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'
-        },
-        { src: '/woods.jpeg', title: "Nature's Roof", description: 'Arghakhanchi, Arghatosh' }
+        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
+        { src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'},
+        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' }
       ]
     },
     {
       images: [
-        { src: '/spotlight.png', title: 'Flower Spotlight', description: 'Arghakhanchi, Arghatosh' },
-        { src: '/water droplets.png', title: "Nature's Detail", description: 'Arghakhanchi, Arghatosh' },
-        { src: '/Butterfly.jpg', title: 'Butterfly', description: 'Arghakhanchi, Arghatosh' }
+        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection" },
+        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom' },
+        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven' }
       ]
     }
   ];
 
+  const smallScreenSlides: Slide[] = [
+    {
+      images: [
+        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight' },
+        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies ' },
+        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light" },
+        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns' }
+      ]
+    },
+    {
+      images: [
+        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
+        { src: '/traffic.png', title: 'Flying poles', description: '' },
+        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
+        { src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'}
+      ]
+    },
+    {
+      images: [
+        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' },
+        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection" },
+        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom' },
+        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven' }
+      ]
+    }
+  ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSlides(smallScreenSlides);
+      } else {
+        setSlides(bigScreenSlides);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const handlePrevious = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
       setTimeout(() => {
         setIsAnimating(false);
       }, 700);
@@ -115,9 +159,9 @@ const Gallery: React.FC = () => {
     };
   }, [isAnimating, currentIndex]);
 
-  const renderGridItems = () => (
-    <div className={`grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
-      {slides[currentIndex].images.map((image, index) => (
+  const renderGridItems = (images: { src: string; title: string; description: string; }[]) => (
+    <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
+      {images.map((image, index) => (
         <div className="relative group" key={index}>
           <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
             <img
@@ -166,11 +210,13 @@ const Gallery: React.FC = () => {
             <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
               {showOverlay && (
                 <button
-                  onClick={() => setShowOverlay(!showOverlay)}
-                  className="absolute inset-0 flex justify-center items-center z-20 bg-transparent"
-                >
-                  <BsCardImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105" />
-                </button>
+                onClick={() => setShowOverlay(!showOverlay)}
+                className="absolute inset-0 flex justify-center items-center z-20 bg-transparent "
+                title="Tap me to see Images"
+              >
+                <BiImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105 animate-pulse" />
+              </button>
+              
               )}
               <div className="relative">
                 {showOverlay && (
@@ -179,7 +225,7 @@ const Gallery: React.FC = () => {
                 <div className={`flex transition-transform duration-500 ease-in-out ${showOverlay ? 'pointer-events-none' : ''}`} style={{ transform: `translateX(-${currentIndex * 100}%)`, opacity: isAnimating ? 0.5 : 1 }}>
                   {slides.map((slide, index) => (
                     <div key={index} className="w-full flex-shrink-0">
-                      {renderGridItems()}
+                      {renderGridItems(slide.images)}
                     </div>
                   ))}
                 </div>
@@ -188,9 +234,9 @@ const Gallery: React.FC = () => {
                 <>
                   <button
                     onClick={handlePrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105 z-20"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#64ffda] to-[#8892b0] p-2 lg:p-3 shadow-lg hover:bg-gradient-to-l hover:from-[#aaffee] hover:to-[#a9bcc6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64ffda] dark:bg-gradient-to-r dark:from-[#64ffda] dark:to-[#8892b0] dark:hover:bg-gradient-to-l dark:hover:from-[#aaffee] dark:hover:to-[#a9bcc6] transition-transform duration-300 ease-in-out transform hover:scale-105 z-20 "
                   >
-                    <AiOutlineLeft className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600" />
+                    <AiOutlineLeft className="h-3 w-3 sm:h-5 sm:w-5 lg:h-5 lg:w-5 text-teal-600 " />
                   </button>
                   <button
                     onClick={handleNext}
