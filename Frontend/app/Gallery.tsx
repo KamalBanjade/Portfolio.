@@ -34,13 +34,13 @@ const Gallery: React.FC = () => {
       images: [
         { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns' },
         { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
-        { src: '/traffic.png', title: 'Apartments', description: 'Lalitpur, Kathdord ollege' }
+        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment' }
       ]
     },
     {
       images: [
         { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'},
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight'},
         { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' }
       ]
     },
@@ -65,9 +65,9 @@ const Gallery: React.FC = () => {
     {
       images: [
         { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
-        { src: '/traffic.png', title: 'Flying poles', description: '' },
+        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment' },
         { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Nature's Bloom", description: 'Arghakhanchi, Arghatosh'}
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight'}
       ]
     },
     {
