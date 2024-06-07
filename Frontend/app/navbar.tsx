@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
                 }
 
                 .fade-in {
-                    animation: fadeIn 0.5s ease-in-out;
+                    animation: fadeIn 1s ease-in-out;
                 }
 
                 .home-button .hex-svg:hover .hexagon {
