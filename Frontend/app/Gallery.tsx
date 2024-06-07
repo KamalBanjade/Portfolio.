@@ -4,6 +4,7 @@ import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'rea
 import Modal from '@/components/ui/modal';
 import { BiImage } from 'react-icons/bi';
 
+
 interface Slide {
   images: {
     src: string;

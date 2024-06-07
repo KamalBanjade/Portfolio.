@@ -1,5 +1,5 @@
-"use client"
-import React, { useEffect,useState, useRef } from 'react';
+"use client";
+import React, { useEffect, useState, useRef } from 'react';
 import { ModalProvider, useModal } from '@/components/ui/modalcontext';
 import Loader from './loader';
 import Navbar from './navbar';
@@ -9,7 +9,7 @@ import Gallery from "./Gallery";
 import Skills from "./Skills";
 import Blogs from "./Blogs";
 import Projects from "./Project";
-import GetInTouch from './contact';
+import Contact from './contact';
 import Footer from './footer';
 
 const scrollbarStyles = `
@@ -26,7 +26,7 @@ const scrollbarStyles = `
 }
 `;
 
-const sectionsToObserve = [ 'projects', 'contact'];
+const sectionsToObserve = ['projects', 'contact'];
 
 const App: React.FC = () => {
   const { isModalOpen, closeModal } = useModal();
@@ -103,7 +103,8 @@ const App: React.FC = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [sectionsToObserve, loading]);
+  }, [loading]);
+
   useEffect(() => {
     if (loading) {
       document.body.style.overflow = 'hidden';
@@ -144,28 +145,17 @@ const App: React.FC = () => {
   }, [loading]);
 
   return (
-    <div key="1" className="bg-[#0a192f] min-h-screen flex flex-col text-white">
+    <div key="1" className="bg-[#0a192f] min-h-screen flex flex-col text-white flex-1 0 0">
       <style jsx>{scrollbarStyles}</style>
-      {/* <style jsx>{`
-        .fade-in {
-          opacity: 0;
-          transform: translateY(15px);
-          animation: fadeIn 3s forwards;
-        }
 
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style> */}
       {loading && <Loader />}
       {!loading && (
-      <div ref={el => { sectionRefs.current['app'] = el; }}>
-      <Navbar />
+        <div ref={el => { sectionRefs.current['app'] = el; }}>
+          <Navbar />
           <div className="h-20 md:h-16" />
-          <section id="home"><Home /></section>
+          <section id="home">
+            <Home />
+          </section>
           <div className="h-20 md:h-16" />
           <section id="about"><About /></section>
           <div className="h-20 md:h-16" />
@@ -177,8 +167,8 @@ const App: React.FC = () => {
           <div className="h-20 md:h-16" />
           <section id="projects"><Projects /></section>
           <div className="h-20 md:h-16" />
-          <section id="contact"><GetInTouch /></section>
-          <div className="fade-in"><Footer /></div>
+          <section id="contact"><Contact /></section>
+          <Footer />
         </div>
       )}
     </div>
@@ -194,4 +184,3 @@ const WrappedApp: React.FC = () => {
 };
 
 export default WrappedApp;
-
