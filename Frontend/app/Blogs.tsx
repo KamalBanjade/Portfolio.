@@ -123,49 +123,51 @@ I'll overcome obstacles, shining bright.`
     ];
 
     return (
-        <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="blogs">
-            <section className="flex flex-col sm:flex-row justify-center items-start space-y-6 sm:space-y-0 sm:space-x-6 md:space-x-8">
-                <div className="flex-1">
-                    <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
-                        <div className='text-center sm:text-left'>
-                            <span className="text-white">Blogs</span>
-                        </div>
-                    </h2>
-                    <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                        Explore a curated collection of my favorite poems.
-                    </p>
-                    <div className="h-6" />
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                        {blogs.map(blog => (
-                            <div
-                                key={blog.id}
-                                ref={el => {
-                                    sectionRefs.current[blog.id] = el;
-                                }}
-                                onClick={() => toggleExpand(blog.id)}
-                                className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-2xl relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} sm:mx-4 lg:mx-auto max-w-md my-4 `}
-                            >
-                                <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
-                                <div className="text-[#ccd6f6] pb-10">
-                                    <p className="text-sm mb-4" style={{ whiteSpace: 'pre-line' }}>
-                                        {truncateText(blog.description, expandedBlog === blog.id)}
-                                    </p>
-                                    <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
-                                        <span className="text-[#64ffda] mb-1 text-xs">
-                                            {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
-                                        </span>
-                                        <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
-                                            {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
-                                        </div>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="blogs">
+        <section className="flex flex-col sm:flex-row justify-center items-start space-y-6 sm:space-y-0 sm:space-x-6 md:space-x-8">
+            <div className="flex-1">
+                <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
+                    <div className='text-center sm:text-left'>
+                        <span className="text-white">Blogs</span>
+                    </div>
+                </h2>
+                <p className="text-[#8892b0] mb-2 leading-relaxed text-sm sm:text-base md:text-lg ">
+                    Explore a curated collection of my favorite poems.
+                </p>
+                <div className="h-2" />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
+                    {blogs.map(blog => (
+                        <div
+                            key={blog.id}
+                            ref={el => {
+                                sectionRefs.current[blog.id] = el;
+                            }}
+                            onClick={() => toggleExpand(blog.id)}
+                            className={`bg-gradient-to-r from-[#112240] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#112240] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-6 w-full sm:my-4`}
+                        >
+                            <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
+                            <div className="text-[#ccd6f6] pb-10">
+                                <p className="text-sm mb-4" style={{ whiteSpace: 'pre-line' }}>
+                                    {truncateText(blog.description, expandedBlog === blog.id)}
+                                </p>
+                                <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
+                                    <span className="text-[#64ffda] mb-1 text-xs">
+                                        {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
+                                    </span>
+                                    <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
+                                        {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
-        </div>
-    );
+            </div>
+        </section>
+    </div>
+);
+
+    
 };
 
 export default Blogs;

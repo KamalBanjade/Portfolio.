@@ -201,10 +201,12 @@ const Gallery: React.FC = () => {
         `}</style>
         <section className="flex flex-col justify-center items-center space-y-6">
           <div className="w-full">
-            <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-left">
+          <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
+            <div className='text-center lg:text-left sm:text-center '>
               <span className="text-white">Gallery</span>
-            </h2>
-            <p className="text-[#8892b0] mb-8 text-center">
+            </div>
+          </h2>
+          <p className="text-[#8892b0] mb-8 leading-relaxed text-sm sm:text-base md:text-lg text-center">
               Embark on a visual journey through my gallery. Each image captures a unique moment, a story waiting to be told, a piece of beauty longing to be shared.
             </p>
 

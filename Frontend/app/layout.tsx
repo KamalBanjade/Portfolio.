@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import React, { ReactNode } from "react";
+import React from "react";
 import Head from "next/head";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -13,61 +14,67 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const baseUrl = "https://www.example.com";
+  const imageUrl = `${baseUrl}/path/to/image.jpg`;
+
+  // Ensure values are defined and not null
+  const safeContent = (content: string | null | undefined): string | undefined => {
+    return content !== null && content !== undefined ? content : undefined;
+  };
+
   return (
     <html lang="en">
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={metadata.description || ''} />
+        <meta name="description" content={safeContent(metadata.description)} />
 
-        {/* <title>{metadata.title || 'Default Title'}</title> */}
+        {/* <title>{safeContent(metadata.title)}</title> */}
 
         <link rel="icon" href="/logo.png" sizes="any" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://www.example.com${process.env.NEXT_PUBLIC_BASE_URL}`} />
-        {/* <meta property="og:title" content={metadata.title} /> */}
-        {/* <meta name="description" content={someProp?.description ?? ''} /> */}
-
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_BASE_URL}/path/to/image.jpg`} />
+        <meta property="og:url" content={baseUrl} />
+        {/* <meta property="og:title" content={safeContent(metadata.title)} /> */}
+        <meta property="og:description" content={safeContent(metadata.description)} />
+        <meta property="og:image" content={imageUrl} />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@yourTwitterHandle" />
-        {/* <meta name="twitter:title" content={metadata.title} /> */}
-        {/* <meta name="twitter:description" content={metadata.description} /> */}
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_BASE_URL}/path/to/image.jpg`} />
+        {/* <meta name="twitter:title" content={safeContent(metadata.title)} /> */}
+        <meta name="twitter:description" content={safeContent(metadata.description)} />
+        <meta name="twitter:image" content={imageUrl} />
 
         {/* Canonical URL */}
-        <link rel="canonical" href={`https://www.example.com${process.env.NEXT_PUBLIC_BASE_URL}`} />
+        <link rel="canonical" href={baseUrl} />
 
         {/* Robots Meta Tag */}
         <meta name="robots" content="index,follow" />
 
-        {/* Structured Data Example - You might need to adjust this based on your content */}
-        {/* This is just a placeholder example */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org/",
-            "@type": "WebSite",
-            "url": `https://www.example.com${process.env.NEXT_PUBLIC_BASE_URL}`,
-            "name": metadata.title,
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": `${process.env.NEXT_PUBLIC_BASE_URL}/search?q={search_term_string}`
-            }
-          })}
-        </script>
-
-        {/* Add other meta tags as needed */}
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "WebSite",
+              url: baseUrl,
+              // name: safeContent(metadata.title),
+              potentialAction: {
+                "@type": "SearchAction",
+                target: `${baseUrl}/search?q={search_term_string}`,
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
       </Head>
-      <body className={inter.className}>
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

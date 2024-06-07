@@ -44,17 +44,24 @@ const Home: React.FC = () => {
                 </div>
             </div>
             <style jsx>{`
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                .fadeIn {
-                    animation: fadeIn 1s ease-in-out;
-                }
+               @keyframes fadeIn {
+                0% {
+                opacity: 0;
+                transform: scale(0.85);
+              }
+          50% {
+            opacity: 0.5;
+           transform: scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease-in-out;
+}
             `}</style>
         </div>
     );
