@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect,useState, useRef } from 'react';
 import { ModalProvider, useModal } from '@/components/ui/modalcontext';
 import Loader from './loader';
 import Navbar from './navbar';
@@ -26,92 +26,161 @@ const scrollbarStyles = `
 }
 `;
 
-const sectionsToObserve = ['projects', 'contact'];
+const sectionsToObserve = [ 'projects', 'contact'];
 
 const App: React.FC = () => {
   const { isModalOpen, closeModal } = useModal();
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sectionRef.current && !sectionRef.current.contains(event.target as Node)) {
-        closeModal();
-      }
-    };
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
 
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [closeModal]);
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
-    const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isModalOpen) {
-        closeModal();
-      }
-    };
+    if (!loading) {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (!sectionRefs.current) return;
 
-    document.addEventListener('keydown', handleEscKey);
-    return () => {
-      document.removeEventListener('keydown', handleEscKey);
-    };
-  }, [isModalOpen, closeModal]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
-      const windowScrollY = window.scrollY;
-  
-      for (let sectionId of sectionsToObserve) {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const sectionTop = section.offsetTop - navbarHeight;
-          const sectionHeight = section.offsetHeight;
-  
-          if (windowScrollY >= sectionTop && windowScrollY < sectionTop + sectionHeight) {
-            console.log("Currently in view:", sectionId);
-            window.history.replaceState(null, '', `#${sectionId}`);
-            break;
+        for (let ref in sectionRefs.current) {
+          if (sectionRefs.current[ref] && !sectionRefs.current[ref]!.contains(event.target as Node)) {
+            closeModal();
           }
         }
-      }
-    };
+      };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [sectionsToObserve]);
+      document.addEventListener('click', handleClickOutside);
+      return () => {
+        document.removeEventListener('click', handleClickOutside);
+      };
+    }
+  }, [closeModal, loading]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!loading) {
+      const handleEscKey = (event: KeyboardEvent) => {
+        if (event.key === 'Escape' && isModalOpen) {
+          closeModal();
+        }
+      };
+
+      document.addEventListener('keydown', handleEscKey);
+      return () => {
+        document.removeEventListener('keydown', handleEscKey);
+      };
+    }
+  }, [isModalOpen, closeModal, loading]);
+
+  useEffect(() => {
+    if (!loading) {
+      const handleScroll = () => {
+        const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+        const windowScrollY = window.scrollY;
+
+        for (let sectionId of sectionsToObserve) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const sectionTop = section.offsetTop - navbarHeight;
+            const sectionHeight = section.offsetHeight;
+
+            if (windowScrollY >= sectionTop && windowScrollY < sectionTop + sectionHeight) {
+              console.log("Currently in view:", sectionId);
+              window.history.replaceState(null, '', `#${sectionId}`);
+              break;
+            }
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [sectionsToObserve, loading]);
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (!loading) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('fade-in');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      sectionsToObserve.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          observer.observe(section);
+        }
+      });
+
+      return () => {
+        sectionsToObserve.forEach(sectionId => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            observer.unobserve(section);
+          }
+        });
+      };
+    }
+  }, [loading]);
 
   return (
     <div key="1" className="bg-[#0a192f] min-h-screen flex flex-col text-white">
       <style jsx>{scrollbarStyles}</style>
-      <div ref={sectionRef}>
-        <Loader />
-        <Navbar />
-        <div className="h-20 md:h-16" />
-        <section><Home /></section>
-        <div className="h-20 md:h-16" />
-        <section><About /></section>
-        <div className="h-20 md:h-16" />
-        <section><Gallery /></section>
-        <div className="h-20 md:h-16" />
-        <section><Skills /></section>
-        <div className="h-20 md:h-16" />
-        <section><Blogs /></section>
-        <div className="h-20 md:h-16" />
-        <section><Projects /></section>
-        <div className="h-20 md:h-16" />
-        <section><GetInTouch /></section>
-        <div className="fade-in"><Footer /></div>
-      </div>
+      {/* <style jsx>{`
+        .fade-in {
+          opacity: 0;
+          transform: translateY(15px);
+          animation: fadeIn 3s forwards;
+        }
+
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style> */}
+      {loading && <Loader />}
+      {!loading && (
+      <div ref={el => { sectionRefs.current['app'] = el; }}>
+      <Navbar />
+          <div className="h-20 md:h-16" />
+          <section id="home"><Home /></section>
+          <div className="h-20 md:h-16" />
+          <section id="about"><About /></section>
+          <div className="h-20 md:h-16" />
+          <section id="gallery"><Gallery /></section>
+          <div className="h-20 md:h-16" />
+          <section id="skills"><Skills /></section>
+          <div className="h-20 md:h-16" />
+          <section id="blogs"><Blogs /></section>
+          <div className="h-20 md:h-16" />
+          <section id="projects"><Projects /></section>
+          <div className="h-20 md:h-16" />
+          <section id="contact"><GetInTouch /></section>
+          <div className="fade-in"><Footer /></div>
+        </div>
+      )}
     </div>
   );
 };
@@ -125,3 +194,4 @@ const WrappedApp: React.FC = () => {
 };
 
 export default WrappedApp;
+

@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
-
 const Loader: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Set loading to false after 2.5 seconds
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 2500);
 
+    // Set URL to `/` when loading
+    if (loading) {
+      window.history.replaceState(null, '', '/');
+    }
+
     return () => clearTimeout(timeout);
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
+    // Disable scrolling when loading
     document.body.style.overflow = loading ? 'hidden' : 'auto';
   }, [loading]);
 
