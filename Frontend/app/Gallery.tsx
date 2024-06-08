@@ -214,10 +214,10 @@ const Gallery: React.FC = () => {
               {showOverlay && (
                 <button
                 onClick={() => setShowOverlay(!showOverlay)}
-                className="absolute inset-0 flex justify-center items-center z-20 bg-transparent "
+                className="absolute inset-0 flex justify-center items-center z-20 bg-transparent text-[#64ffda] font-bold animate-pulse"
                 title="Tap me to see Images"
               >
-                <BiImage className="text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] hover:text-teal-500 transition duration-300 transform hover:scale-105 animate-pulse" />
+                <BiImage className=" text-2xl sm:text-3xl lg:text-4xl text-[#64ffda] mr-1 hover:text-teal-500 transition duration-300 transform hover:scale-105 animate-pulse w-7" /> Explore
               </button>
               
               )}

@@ -3,6 +3,7 @@
     "@reach/dialog": "^0.18.0",
     "classnames": "^2.5.1",
     "intersection-observer": "^0.12.2",
+    "react-rating": "^2.0.5",
     "react-responsive": "^10.0.0",
     "styled-components": "^6.1.11"
   },
