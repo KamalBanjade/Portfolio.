@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
         Designed & Built by Kamal Banjade
       </p>
       <p className="text-[#8892b0] text-xs sm:text-sm mt-2">
-        © {new Date().getFullYear()} All rights reserved
+        © {new Date().getFullYear()} All rights reserved.
       </p>
 
     </footer>
