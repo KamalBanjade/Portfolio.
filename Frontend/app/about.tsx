@@ -8,7 +8,7 @@ const About: React.FC = () => {
       <style jsx>{`
         @keyframes floating {
           0% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
+          50% { transform: translateY(-20px); }
           100% { transform: translateY(0); }
         }
         
