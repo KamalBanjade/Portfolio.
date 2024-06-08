@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import StarRating from './StarRating'; 
+import Cookies from '@/components/js-cookie';
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,6 +11,7 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  const [rating, setRating] = useState(0); // State to store rating
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,6 +34,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
 
         setImageDimensions({ width, height });
       };
+
+      const savedRating = Cookies.get(`rating-${imageSrc}`);
+      if (savedRating) {
+        setRating(Number(savedRating));
+      }
     }
   }, [isOpen, imageSrc]);
 
@@ -52,6 +60,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
     };
   }, [isOpen, onClose]);
 
+  const handleRating = (newRating: number) => {
+    setRating(newRating);
+    Cookies.set(`rating-${imageSrc}`, newRating.toString(), { expires: 365 });
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -65,6 +78,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
           <span className="sr-only">Close</span>
         </button>
         <img src={imageSrc} alt="Modal view" className="w-full h-full object-contain rounded-lg" />
+        <div className="absolute bottom-2 left-2 right-2 flex justify-center">
+          <StarRating rating={rating} onRating={handleRating} />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useModal } from '@/components/ui/modalcontext';
+import { useModal } from '@/components/ui/modalcontext'
 import { AiOutlineLeft, AiOutlineRight, AiOutlineEye, AiOutlineClose } from 'react-icons/ai';
 import Modal from '@/components/ui/modal';
 import { BiImage } from 'react-icons/bi';
