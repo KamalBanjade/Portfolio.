@@ -131,11 +131,11 @@ I'll overcome obstacles, shining bright.`
                         <span className="text-white">Blogs</span>
                     </div>
                 </h2>
-                <p className="text-[#8892b0] mb-2 leading-relaxed text-sm sm:text-base md:text-lg ">
+                <p className="text-[#8892b0] mb-2 leading-relaxed text-sm sm:text-base md:text-md pl-7">
                     Explore a curated collection of my favorite poems.
                 </p>
-                <div className="h-2" />
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 justify-items-center">
+                <div className="h-4" />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 justify-items-center ">
                     {blogs.map(blog => (
                       
                          <div

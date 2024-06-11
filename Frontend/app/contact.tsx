@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
                         <span className="text-white">Get In Touch</span>
                     </h2>
                     <div className="max-w-6xl mx-auto sm:mx-0 text-[#8892b0] text-sm sm:text-base md:text-lg leading-relaxed text-center">
-                        <p className="mb-4 ">
+                        <p className="mb-4 pl-7">
                             Thanks for stopping by! Let's connect and explore together. I have always loved exploring new ideas and opportunities. Feel free to reach out. Looking forward to hearing from you!
                         </p>
                         <div className="flex flex-col items-center">
