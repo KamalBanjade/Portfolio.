@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
     return (
         <div className="fadeIn">
-            <div className="container flex-1 flex flex-col justify-center items-start px-6 md:px-12 lg:px-20 text-left mt-8 p-4 sm:p-6 md:p-8">
+            <div className="container bg-gradient-to-r from-[#0a192f] to-[#0a192f]  flex-1 flex flex-col justify-center items-start px-6 md:px-12 lg:px-20 text-left mt-8 p-4 sm:p-6 md:p-8 relative transition duration-500 ease-in-out transform hover:scale-105 hover:translate-y-2 lg:mx-10 mx-1">
                 <h1 className="text-[#64ffda] text-3xl md:text-4xl lg:text-4xl font-bold mb-4"> 🚀Welcome! I'm</h1>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#a8b2d1] leading-snug md:leading-tight lg:leading-tight">Kamal Banjade.</h2>
                 <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-6 text-[#8892b0] leading-snug md:leading-tight lg:leading-tight">19-Year-Old Web Explorer Pursuing BSc.CSIT.</h3>

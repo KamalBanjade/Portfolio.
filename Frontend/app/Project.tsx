@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
     };
 
     return (
-        <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="projects">
+        <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="projects">
             {/* Projects Header */}
             <h2 className=" text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center sm:text-left">
                 Projects

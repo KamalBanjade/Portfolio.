@@ -4,7 +4,7 @@ const About: React.FC = () => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform md:hover:scale-100 lg:hover:scale-100 hover:translate-y-1" id="about">
+    <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform md:hover:scale-100 lg:hover:scale-100 hover:translate-y-2" id="about">
       <style jsx>{`
         @keyframes floating {
           0% { transform: translateY(0); }

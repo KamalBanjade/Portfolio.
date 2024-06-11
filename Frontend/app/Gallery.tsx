@@ -192,7 +192,7 @@ const Gallery: React.FC = () => {
 
   return (
     <div className="relative" id="gallery" ref={galleryRef}>
-      <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#1a2f4f] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`}>
+      <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`}>
         <style jsx>{`
           .blur {
             filter: blur(10px);
