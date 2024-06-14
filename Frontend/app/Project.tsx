@@ -47,7 +47,7 @@ const Projects: React.FC = () => {
             githubLink: 'https://github.com/KamalBanjade/Portfolio..git',
             projectLink: '#'
         }
-        
+
     ];
 
     useEffect(() => {
@@ -66,6 +66,17 @@ const Projects: React.FC = () => {
     return (
         <div className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="projects">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center sm:text-left">Projects</h2>
+            <p className="text-[#8892b0] mb-4 leading-relaxed text-xs sm:text-base md:text-md pl-7">
+                Below are some of my recent projects utilizing the MERN stack. Additional side projects can be found on my&nbsp;
+                <a
+                    href="https://github.com/KamalBanjade"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-teal-500 hover:text-teal-400 transition-colors duration-300"
+                >
+                    GitHub
+                </a>.
+            </p>
 
             <section className="flex flex-col sm:flex-row justify-start items-start space-y-6 sm:space-y-0 sm:space-x-12 md:space-x-8">
                 <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 sm:justify-center sm:items-start">
