@@ -164,25 +164,25 @@ const Gallery: React.FC = () => {
     <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
       {images.map((image, index) => (
         <div className="relative group" key={index}>
-          <div className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+          <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
             <img
               src={image.src}
               alt={`Image ${index + 1}`}
-              className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
+              className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4 ">
               <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
                 {image.title}
               </h3>
-              <p className="text-gray-400 text-xs sm:text-sm line-clamp-2 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
+              <p className="text-gray-300 text-xs sm:text-sm line-clamp-2 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
                 {image.description}
               </p>
             </div>
             <button
               onClick={() => handleEyeClick(index)}
-              className="absolute top-2 right-2 bg-transparent text-white rounded-full p-1 hover:bg-gray-600 focus:outline-none"
+              className="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75 focus:outline-none transition duration-300"
             >
-              <AiOutlineEye className="text-base sm:text-lg hover:text-teal-600" />
+              <AiOutlineEye className="text-base sm:text-lg hover:text-teal-500" />
             </button>
           </div>
         </div>
