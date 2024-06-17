@@ -38,7 +38,7 @@ const Skills: React.FC = () => {
     }, []);
 
     return (
-        <div ref={skillsRef} className="max-w-6xl lg:mx-14 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="skills">
+        <div ref={skillsRef} className="max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="skills">
             <style>
                 {`
                 @keyframes progress {

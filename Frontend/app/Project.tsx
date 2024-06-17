@@ -119,12 +119,12 @@ const Projects: React.FC = () => {
                                         />
 
                                         <div className="flex-1 text-center sm:text-left ">
-                                            <h3 className="text-[#64ffda] text-lg sm:text-xl md:text-xl lg:text-xl font-bold mb-4">{project.title}</h3>
-                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-base mb-4 ${expandedProject === project.id ? '' : 'line-clamp-3'}`}>
+                                            <h3 className="text-[#64ffda] text-lg sm:text-xl md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
+                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-sm mb-4 ${expandedProject === project.id ? '' : 'line-clamp-4'}`}>
                                                 {project.description}
                                             </p>
                                             <button
-                                                className="text-teal-500 hover:text-teal-400 transition-colors duration-300 flex items-center"
+                                                className="text-teal-500 hover:text-teal-400 transition-colors duration-300 flex items-center text-sm"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     toggleExpand(project.id);
@@ -147,7 +147,7 @@ const Projects: React.FC = () => {
                                                     href={project.projectLink}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="bg-gradient-to-r from-[#64ffda] to-[#1a2f4f] text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2"
+                                                    className="bg-gradient-to-r from-[#64ffda] to-[#1a2f4f] text-white text-sm md:text-base lg:text-md py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-transparent transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2"
                                                 >
                                                     <FaExternalLinkAlt />
                                                     <span>View Project</span>
@@ -157,7 +157,7 @@ const Projects: React.FC = () => {
                                                     href={project.githubLink}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="bg-transparent hover:bg-teal-500 text-teal-500 hover:text-white text-sm md:text-base lg:text-sm py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-teal-500 transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2 sm:ml-auto"
+                                                    className="bg-transparent hover:bg-teal-500 text-teal-500 hover:text-white text-sm md:text-base lg:text-md py-2 px-6 lg:py-1 lg:px-4 rounded-md border border-teal-500 transition duration-300 transform hover:scale-105 hover:translate-y-1 shadow-md flex items-center justify-center space-x-2 sm:ml-auto "
                                                 >
                                                     <FaGithub />
                                                     <span>GitHub</span>

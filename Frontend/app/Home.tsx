@@ -30,14 +30,14 @@ const Home: React.FC = () => {
                     <button
                         onClick={() => scrollToSection('projects')}
                         className="bg-[#0a192f] hover:bg-teal-600 text-teal-500 font-semibold py-3 px-6 rounded-md border border-teal-500 transition duration-300 transform hover:scale-105"
-                        style={{ width: '156px', height: '50px' }}
+                        style={{ width: '158px', height: '50px' }}
                     >
                         View Projects
                     </button>
                     <button
                         onClick={() => scrollToSection('contact')}
                         className="bg-transparent hover:bg-white hover:text-teal-500 text-white font-semibold py-3 px-6 rounded-md border border-white transition duration-300 transform hover:scale-105"
-                        style={{ width: '156px', height: '50px' }}
+                        style={{ width: '158px', height: '50px' }}
                     >
                         Contact Me
                     </button>

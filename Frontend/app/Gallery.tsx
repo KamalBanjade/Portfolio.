@@ -170,7 +170,7 @@ const Gallery: React.FC = () => {
               alt={`Image ${index + 1}`}
               className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
               <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
                 {image.title}
               </h3>
@@ -189,7 +189,7 @@ const Gallery: React.FC = () => {
       ))}
     </div>
   );
-
+  
   return (
     <div className="relative" id="gallery" ref={galleryRef}>
       <div className={`max-w-6xl mx-auto bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 ${isModalOpen ? 'blur' : ''}`}>
