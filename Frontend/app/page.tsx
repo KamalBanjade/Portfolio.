@@ -152,11 +152,11 @@ const App: React.FC = () => {
       {!loading && (
         <div ref={el => { sectionRefs.current['app'] = el; }}>
           <Navbar />
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="home">
             <Home />
           </section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="about"><About /></section>
           <div className="h-20 md:h-16" />
           <section id="gallery"><Gallery /></section>

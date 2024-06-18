@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-
+import './line.css';
 const Blogs: React.FC = () => {
     const [expandedBlog, setExpandedBlog] = useState<number | null>(null);
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -123,19 +123,24 @@ I'll overcome obstacles, shining bright.`
     ];
 
     return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-4 sm:p-6 md:p-8 shadow-xl relative transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1" id="blogs">
-        <section className="flex flex-col sm:flex-row justify-center items-start space-y-6 sm:space-y-0 sm:space-x-6 md:space-x-8 ">
-            <div className="flex-1">
-                <h2 className="text-[#64ffda] text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
-                    <div className='text-center sm:text-left'>
-                        <span className="text-white">Blogs</span>
-                    </div>
-                </h2>
+   <div className="max-w-auto mx-auto sm:mx-auto md:mx-8 lg:mx-10 xl:mx-12 2xl:mx-16 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-6 md:p-10 shadow-xl relative transition duration-500 ease-in-out transform hover:translate-y-2" id="blogs">
+    <section className="flex flex-col sm:flex-row justify-center items-center space-y-8 sm:space-y-0 sm:space-x-8 md:space-x-10">
+
+        <div className="flex-1">
+          <div className="line-container mb-6">
+            <div className="line start"></div>
+            <h2 className="text-[#64ffda] text-3xl md:text-4xl font-bold title">
+              <div className='text-center lg:text-left sm:text-center'>
+                <span className="text-white">Blogs</span>
+              </div>
+            </h2>
+            <div className="line end"></div>
+          </div>
                 <p className="text-[#8892b0] mb-2 leading-relaxed text-sm sm:text-base md:text-md pl-7">
                     Explore a curated collection of my favorite poems.
                 </p>
                 <div className="h-4" />
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 justify-items-center ">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 justify-items-center ">
                     {blogs.map(blog => (
                       
                          <div
