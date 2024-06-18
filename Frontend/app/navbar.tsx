@@ -164,8 +164,8 @@ const Navbar: React.FC = () => {
                     </Button>
                 </SheetTrigger>
 
-                <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out">
-                    <div className="grid gap-2 py-4">
+                <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out w-40 max-w-full">
+                    <div className="grid gap-2 py-4 pr-4">
                         {sections.map(sectionId => (
                             <Link key={sectionId} href={`#${sectionId}`} passHref>
                                 <span
@@ -173,15 +173,14 @@ const Navbar: React.FC = () => {
                                         scrollToSection(sectionId);
                                         setSheetOpen(false);
                                     }}
-                                    className={`flex w-full items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda] text-left`}
-                                    style={{ textAlign: 'left' }}
+                                    className={`flex justify-center items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda]`}
                                 >
                                     {sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}
                                 </span>
                             </Link>
                         ))}
                         <button
-                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105"
+                            className="mt-4 ml-auto bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-1 px-3 sm:py-2 sm:px-5 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 text-sm sm:text-base"
                             onClick={() => openSheet('resume')}
                         >
                             Resume
@@ -190,32 +189,34 @@ const Navbar: React.FC = () => {
                 </SheetContent>
             </Sheet>
 
+
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
                 <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#0a192f] transform transition-transform duration-300 ease-in-out w-full md:w-auto">
-                    <div className="p-6 flex flex-col items-center text-center space-y-6 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 fade-in">
-                        <h2 className="text-[#64ffda] text-xl md:text-2xl lg:text-2xl font-bold mb-2 text-center">
+                    <div className="p-4 flex flex-col items-center text-center space-y-4 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 fade-in">
+                        <h2 className="text-[#64ffda] text-xl md:text-2xl font-bold mb-2">
                             <span className="text-#8892b0">Resume</span>
                         </h2>
                         <p className="text-#a8b2d1 text-base">
                             Please find my resume attached. Looking forward to connecting!
                         </p>
-                        <div className="w-full flex justify-center shadow-lg rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out ">
+                        <div className="w-full flex justify-center shadow-lg rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out">
                             <iframe
                                 src="/resume.pdf"
-                                className="h-[57.5vh] w-[41vh] md:h-[56vh] md:w-[40vh] rounded-md border-2 border-[#64ffda]"
+                                className="h-[57.5vh] w-[41vh] md:h-[56vh] md:w-[43vh] rounded-md border-2 border-[#64ffda]"
                                 style={{ border: 'none' }}
                             />
                         </div>
                         <a
                             href="/resume.pdf"
                             download="kamal's_resume.pdf"
-                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 flex items-center space-x-2"
+                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-2 px-5 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 flex items-center space-x-2"
                         >
                             <span>Download Resume</span> <FaDownload />
                         </a>
                     </div>
                 </SheetContent>
             </Sheet>
+
         </nav>
     );
 };
