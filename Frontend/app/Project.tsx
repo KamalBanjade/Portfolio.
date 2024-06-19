@@ -25,7 +25,7 @@ const Projects: React.FC = () => {
             listTitle: 'Project 1',
             title: 'Secure MERN Stack Authentication System.',
             description: 'Dive into a full-stack application where the MERN stack shines on both the frontend and backend. This project showcases a seamless registration and login system, securely storing user data in MongoDB as hashed values. But that\'s not all—users can reset their passwords through an email link that includes an expiring token, ensuring top-notch security. Should a password be updated, our robust system ensures the changes reflect instantly in the database, allowing for effortless and secure logins with the new credentials.',
-            image: '/placeholder.svg',
+            image: '/form.png',
             githubLink: 'https://github.com/KamalBanjade/Sign_In_Form.git',
             projectLink: '#'
         },
@@ -43,7 +43,7 @@ const Projects: React.FC = () => {
             listTitle: 'Project 3',
             title: 'Personal Portfolio',
             description: 'This is my personal portfolio, crafted with meticulous attention to detail using Next.js. It features a comprehensive and modern design, incorporating everything a typical website should have. The portfolio is highly responsive, ensuring a seamless user experience across various devices. It includes well-defined buttons and intuitive navigation, allowing visitors to effortlessly explore different sections. The URLs dynamically update according to the section being viewed, providing a smooth browsing experience. Advanced event handlers enhance interactivity, making the portfolio engaging and user-friendly. Additionally, it includes sections for showcasing projects, skills, contact information, and more, all neatly organized to present my work and achievements effectively.',
-            image: '/placeholder.svg',
+            image: '/logo.png',
             githubLink: 'https://github.com/KamalBanjade/Portfolio..git',
             projectLink: '#'
         }
@@ -122,7 +122,7 @@ const Projects: React.FC = () => {
                                         {/* Project Image */}
                                         <img
                                             alt={project.title}
-                                            className="rounded-lg object-cover w-32 h-32 sm:w-48 sm:h-48 lg:w-32 lg:h-32 mb-4 sm:mb-0"
+                                            className="rounded-lg object-cover w-34 h-32 sm:w-48 sm:h-48 lg:w-30 lg:h-30 mb-4 sm:mb-0"
                                             src={project.image}
                                         />
 

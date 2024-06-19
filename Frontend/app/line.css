@@ -29,12 +29,19 @@
 
 @media (min-width: 1024px) {
   .line-container {
-    justify-content: flex-start;
-   
+    position: absolute;
+    top: 0;
+    left: 2;
+    width: 100%;
+    height: 1px;
+    z-index: 10;
   }
-
-  .line{
-    background: linear-gradient(to right,  #64ffda,transparent);
+  
+  .line {
+    height: 100%;
+    background: linear-gradient(to right, #64ffda, transparent);
+    width: 0;
+    transition: width 0.5s ease;
   }
 
   .line.start {
@@ -46,3 +53,4 @@
     text-align: left;
   }
 }
+

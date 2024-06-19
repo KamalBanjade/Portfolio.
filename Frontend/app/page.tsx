@@ -152,21 +152,21 @@ const App: React.FC = () => {
       {!loading && (
         <div ref={el => { sectionRefs.current['app'] = el; }}>
           <Navbar />
-          <div className="h-20 md:h-20" />
+          <div className="h-20 md:h-28" />
           <section id="home">
             <Home />
           </section>
           <div className="h-20 md:h-20" />
           <section id="about"><About /></section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="gallery"><Gallery /></section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="skills"><Skills /></section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="blogs"><Blogs /></section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="projects"><Projects /></section>
-          <div className="h-20 md:h-16" />
+          <div className="h-20 md:h-20" />
           <section id="contact"><Contact /></section>
           <Footer />
         </div>
