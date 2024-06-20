@@ -6,10 +6,10 @@ import { FaBars, FaDownload } from 'react-icons/fa';
 import Cookies from '@/components/js-cookie'; // Updated import path
 
 const Navbar: React.FC = () => {
-    const [activeSection, setActiveSection] = useState<string>('home');
-    const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
-    const [sheetView, setSheetView] = useState<string>('');
-    const sections = ['about', 'gallery', 'skills', 'blogs'];
+const [activeSection, setActiveSection] = useState<string>('home');
+const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
+const [sheetView, setSheetView] = useState<string>('');
+const sections = ['about', 'gallery', 'skills', 'blogs'];
 
     const scrollToSection = (sectionId: string) => {
         setActiveSection(sectionId);
@@ -21,18 +21,18 @@ const Navbar: React.FC = () => {
             if (screenWidth <= 768) {
                 offsetAdjustment = -10;
             }
-
+    
             const sectionTop = section.offsetTop - navbarHeight + offsetAdjustment;
             const scrollOptions: ScrollToOptions = {
                 top: sectionTop,
                 behavior: 'smooth'
             };
-
+    
             window.scrollTo(scrollOptions);
             window.history.replaceState(null, '', `#${sectionId}`);
         }
     };
-
+    
     useEffect(() => {
         const handleScroll = () => {
             const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
@@ -42,15 +42,15 @@ const Navbar: React.FC = () => {
                 return;
             }
     
-
+    
             let foundActiveSection = false;
-
+    
             for (const sectionId of sections) {
                 const section = document.getElementById(sectionId);
                 if (section) {
                     const sectionTop = section.offsetTop - navbarHeight;
                     const sectionHeight = section.offsetHeight;
-
+    
                     if (windowScrollY >= sectionTop - 60 && windowScrollY < sectionTop + sectionHeight - 60) { // Adjust for navbar height
                         setActiveSection(sectionId);
                         window.history.replaceState(null, '', `#${sectionId}`);
@@ -63,33 +63,33 @@ const Navbar: React.FC = () => {
                 setActiveSection('');
             }
         };
-
+    
         window.addEventListener('scroll', handleScroll);
         handleScroll();
-
+    
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [sections]);
-
+    
     useEffect(() => {
         Cookies.set('activeSection', activeSection);
         window.history.replaceState(null, '', `#${activeSection}`);
     }, [activeSection]);
     
-
+    
     const openSheet = (view: string) => {
         setSheetView(view);
         setSheetOpen(true);
         window.history.replaceState(null, '', `#${view}`);
     };
-
+    
     const closeSheet = () => {
         setSheetOpen(false);
         const currentSection = activeSection || 'home';
         window.history.replaceState(null, '', `#${currentSection}`);
     };
-
+    
     return (
         <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800/50 dark:shadow-gray-800 fade-in ">
             <Link href="#home" passHref>
@@ -126,11 +126,11 @@ const Navbar: React.FC = () => {
                         opacity: 1;
                     }
                 }
-
+    
                 .fade-in {
                     animation: fadeIn 1s ease-in-out;
                 }
-
+    
                 .home-button .hex-svg:hover .hexagon {
                     stroke: #64ffda;
                 }
@@ -141,7 +141,7 @@ const Navbar: React.FC = () => {
                     transform: scale(1.2);
                 }
             `}</style>
-
+    
             <div className="hidden md:flex items-center space-x-4 md:space-x-6 lg:space-x-8 ">
             {sections.map(sectionId => (
                     <Link key={sectionId} href={`#${sectionId}`} passHref>
@@ -169,7 +169,7 @@ const Navbar: React.FC = () => {
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
                 </SheetTrigger>
-
+    
                 <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out w-40 max-w-full">
                     <div className="grid gap-2 py-4 pr-4">
                         {sections.map(sectionId => (
@@ -194,7 +194,7 @@ const Navbar: React.FC = () => {
                     </div>
                 </SheetContent>
             </Sheet>
-
+    
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
                 <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#0a192f] transform transition-transform duration-300 ease-in-out w-full md:w-auto">
                     <div className="p-4 flex flex-col items-center text-center space-y-4 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 fade-in">
