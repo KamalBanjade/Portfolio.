@@ -54,3 +54,26 @@
   }
 }
 
+/* Default styles */
+.text-custom {
+  color: #ccd6f6;
+  font-size: 1rem; /* Default font size */
+  font-weight: bold;
+}
+
+/* Styles for small screens */
+@media (max-width: 576px) {
+  .text-custom {
+    font-size: 0.6rem; /* Small screen font size */
+  }
+}
+.text-customs {
+  color: #64ffda;
+  font-size: 1rem; /* Default font size */
+  font-weight: bold;
+}
+@media (max-width: 576px) {
+  .text-customs {
+    font-size: 0.6rem; /* Small screen font size */
+  }
+}

@@ -81,10 +81,10 @@ const Skills: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4">
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32] my-30">
-                            <h3 className="text-[#64ffda] text-xs sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Front-End <FaLaptopCode className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
+                            <h3 className="text-customs mb-4 flex justify-between items-center">
+                                Front-End <FaLaptopCode className=" hover:text-teal-600 transition duration-300 text-custom" />
                             </h3>
-                            <ul className="list-disc pl-4 text-xs md:text-base lg:text-base text-[#8892b0]">
+                            <ul className="list-disc pl-2 md:pl-4 lg:pl-6 text-xs md:text-base lg:text-base text-[#8892b0]">
                                 <li>HTML5</li>
                                 <li>CSS3</li>
                                 <li>JavaScript</li>
@@ -93,10 +93,10 @@ const Skills: React.FC = () => {
                             </ul>
                         </div>
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32] sm:my-30">
-                            <h3 className="text-[#64ffda] text-xs sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Back-End <FaServer className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
+                            <h3 className="text-customs mb-4 flex justify-between items-center">
+                                Back-End <FaServer className=" hover:text-teal-600 transition duration-300 text-custom " />
                             </h3>
-                            <ul className="list-disc pl-4 text-xs md:text-base lg:text-base text-[#8892b0]">
+                            <ul className="list-disc pl-2 md:pl-4 lg:pl-6 text-xs md:text-base lg:text-base text-[#8892b0]">
                                 <li>Node.js</li>
                                 <li>Express.js</li>
                                 <li>MongoDB</li>
@@ -105,10 +105,10 @@ const Skills: React.FC = () => {
                             </ul>
                         </div>
                         <div className="bg-[#112240] rounded-lg p-6 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-[#0e1a32] my-30">
-                            <h3 className="text-[#64ffda] text-xs sm:text-base md:text-lg lg:text-lg font-bold mb-4 flex justify-between items-center">
-                                Tools <FaTools className="text-[#8892b0] hover:text-teal-600 transition duration-300 text-xs sm:text-base md:text-lg lg:text-xl" />
+                            <h3 className="text-customs font-bold mb-4 flex justify-between items-center">
+                                Tools <FaTools className=" hover:text-teal-600 transition duration-300 text-custom" />
                             </h3>
-                            <ul className="list-disc pl-4 text-xs md:text-base lg:text-base text-[#8892b0]">
+                            <ul className="list-disc pl-2 md:pl-4 lg:pl-6 text-xs md:text-base lg:text-base text-[#8892b0]">
                                 <li>Git</li>
                                 <li>GitHub</li>
                                 <li>Figma</li>
@@ -121,8 +121,8 @@ const Skills: React.FC = () => {
                     <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ">
                         <div className="rounded-lg bg-gray-800 p-3 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gray-700 ">
                             <div className="flex items-center justify-between mb-1">
-                                <h3 className="text-[#ccd6f6] text-xs sm:text-sm md:text-base lg:text-lg font-bold">Front-End</h3>
-                                <div className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-gray-50 hover:text-teal-500 ]">70%</div>
+                                <h3 className="text-custom">Front-End</h3>
+                                <div className="text-custom ]">70%</div>
                             </div>
                             <div className="mt-1">
                                 <div className="h-1 sm:h-2 w-full rounded-full bg-gray-700">
@@ -138,8 +138,8 @@ const Skills: React.FC = () => {
                         </div>
                         <div className="rounded-lg bg-gray-800 p-3 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gray-700">
                             <div className="flex items-center justify-between mb-1">
-                                <h3 className="text-[#ccd6f6] text-xs sm:text-sm md:text-base lg:text-lg font-bold">Back-End</h3>
-                                <div className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-gray-50 hover:text-teal-500">60%</div>
+                                <h3 className="text-custom">Back-End</h3>
+                                <div className="text-custom">60%</div>
                             </div>
                             <div className="mt-1">
                                 <div className="h-1 sm:h-2 w-full rounded-full bg-gray-700">
@@ -155,8 +155,8 @@ const Skills: React.FC = () => {
                         </div>
                         <div className="rounded-lg bg-gray-800 p-3 shadow-lg transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gray-700">
                             <div className="flex items-center justify-between mb-1">
-                                <h3 className="text-[#ccd6f6] text-xs sm:text-sm md:text-base lg:text-lg font-bold">Tools</h3>
-                                <div className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-gray-50 hover:text-teal-500">80%</div>
+                                <h3 className="text-custom">Tools</h3>
+                                <div className="text-custom">80%</div>
                             </div>
                             <div className="mt-1">
                                 <div className="h-1 sm:h-2 w-full rounded-full bg-gray-700">

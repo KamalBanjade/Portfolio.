@@ -34,7 +34,7 @@ const Projects: React.FC = () => {
             listTitle: 'Project 2',
             title: 'BookBase: Efficient Book CRUD Application.',
             description: 'Explore the capabilities of the MERN stack with this comprehensive Book CRUD application. Dive into a seamless experience where users can create new book entries by filling out a detailed form including fields for the book name, ISBN (International Book Serial Number), author, description, published date, and publisher date. Users can effortlessly view their submitted entries and browse through a list of all books. Editing and updating book information is made simple, with all changes meticulously stored in MongoDB, ensuring data integrity and up-to-date records.',
-            image: '/placeholder.svg',
+            image: '/books.png',
             githubLink: 'https://github.com/KamalBanjade/CRUD-mern-.git',
             projectLink: '#'
         },
