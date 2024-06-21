@@ -212,7 +212,7 @@ const Gallery: React.FC = () => {
             <p className="text-[#8892b0] mb-8 leading-relaxed text-sm sm:text-base md:text-md text-center pl-7">
               Embark on a visual journey through my gallery. Each image captures a unique moment, a story waiting to be told, a piece of beauty longing to be shared.
             </p>
-            <div className="w-full max-w-6xl mx-auto overflow-hidden relative">
+            <div className="w-full max-w-auto mx-auto overflow-hidden relative">
               {showOverlay && (
                 <button
                   onClick={() => setShowOverlay(!showOverlay)}

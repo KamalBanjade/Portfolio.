@@ -110,7 +110,7 @@ const Projects: React.FC = () => {
                     </div>
 
                     <div className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto lg:ml-20 lg:w-4/5 lg:h-auto sm:w-full sm:mt-4 relative transition duration-500 ease-in-out transform md:hover:scale-105 lg:hover:scale-105 hover:translate-y-1 bg-gray-transparent rounded-lg">
-                        <div className="max-w-3xl mx-auto">
+                        <div className="max-w-auto mx-auto">
                             {projects.map((project) => (
                                 activeProject === project.id && (
                                     <div
@@ -122,13 +122,13 @@ const Projects: React.FC = () => {
                                         {/* Project Image */}
                                         <img
                                             alt={project.title}
-                                            className="rounded-lg object-cover w-34 h-32 sm:w-48 sm:h-48 lg:w-30 lg:h-30 mb-4 sm:mb-0"
+                                            className="rounded-lg object-cover w-34 h-32 sm:w-48 sm:h-48 lg:w-30 lg:h-30 mb-4 sm:mb-0 transition duration-500 ease-in-out hover:scale-110"
                                             src={project.image}
                                         />
 
                                         <div className="flex-1 text-center sm:text-left ">
                                             <h3 className="text-[#64ffda] text-lg sm:text-xl md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
-                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-sm mb-4 ${expandedProject === project.id ? '' : 'line-clamp-4'}`}>
+                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-sm mb-4 ${expandedProject === project.id ? '' : 'line-clamp-3'}`}>
                                                 {project.description}
                                             </p>
                                             <button

@@ -20,7 +20,8 @@ const Home: React.FC = () => {
 
     return (
         <div className="fadeIn">
-            <div className="container min-h-[300px] sm:min-h-[400px] max-w-6xl mx-auto rounded-lg p-4 sm:p-6 md:p-8 relative transition duration-500 ease-in-out transform hover:scale-100 lg:hover:scale-105 hover:translate-y-1 items-center shadow-sm">
+            <div className="max-w-auto mx-auto sm:mx-auto md:mx-8 lg:mx-10 xl:mx-12 2xl:mx-16 bg-gradient-to-r from-[#0a192f] to-[#0a192f]  rounded-lg p-6 md:p-10  relative  transition duration-500 ease-in-out transform hover:translate-y-2 hover:scale-100" id="about">
+
                 <h1 className="text-[#64ffda] text-3xl md:text-4xl lg:text-4xl font-bold mb-4">
                     🚀<TypingEffect
                         text={["Hello!","नमस्ते!","¡Hola!", "Bonjour!", "こんにちは!", "Hallo!", "Ciao!", "Olá!"]}
@@ -51,7 +52,9 @@ const Home: React.FC = () => {
                         Contact Me
                     </button>
                 </div>
+
             </div>
+            
             <style jsx>{`
                 @keyframes fadeIn {
                     0% {
