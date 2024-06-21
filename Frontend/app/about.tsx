@@ -50,26 +50,45 @@ const About: React.FC = () => {
                     onMouseLeave={() => setHovered(false)}
                   />
                 </div>
-                <style jsx>{`
-                  @keyframes float {
-                    0% {
-                      transform: translateY(0px);
-                    }
-                    50% {
-                      transform: translateY(-10px);
-                    }
-                    100% {
-                      transform: translateY(0px);
-                    }
-                  }
-                `}</style>
               </div>
             </div>
           </div>
         </section>
       </div>
+      <style jsx>{`
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+          100% {
+            transform: translateY(0px);
+          }
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.85);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scale(1.02);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .fadeIn {
+          animation: fadeIn 0.8s ease-in-out;
+        }
+      `}</style>
     </div>
   );
-}
+};
 
 export default About;
