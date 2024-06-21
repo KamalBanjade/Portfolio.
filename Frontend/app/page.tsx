@@ -15,8 +15,9 @@ import Footer from './footer';
 const scrollbarStyles = `
 ::-webkit-scrollbar {width: 6px;height: 6px;}
 ::-webkit-scrollbar-track {background: #0a192f;}
-::-webkit-scrollbar-thumb {background: #64ffda;border-radius: 3px;}`;
-
+::-webkit-scrollbar-thumb {background: #64ffda;border-radius: 3px;}
+html {scroll-behavior: smooth;}
+`;
 const App: React.FC = () => {
   const { isModalOpen, closeModal } = useModal();
   const appRef = useRef<HTMLDivElement | null>(null);
