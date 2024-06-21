@@ -86,8 +86,8 @@ const Projects: React.FC = () => {
                 </a>.
             </p>
 
-            <section className="flex flex-col sm:flex-row justify-start items-start space-y-6 sm:space-y-0 sm:space-x-12 md:space-x-8">
-                <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 sm:justify-center sm:items-start">
+            <section className="flex flex-col sm:flex-row justify-start items-start space-y-6 sm:space-y-0 sm:space-x-12 md:space-x-8 ">
+                <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 sm:justify-center sm:items-start ">
                     <div className="p-4 md:p-6 lg:p-12 w-full sm:w-auto overflow-y-auto sm:overflow-x-auto rounded-lg lg:ml-20">
                         <div className="flex sm:flex-col space-x-4 sm:space-x-0 sm:space-y-2 overflow-x-auto sm:overflow-x-hidden">
                             {projects.map((project) => (
@@ -127,8 +127,8 @@ const Projects: React.FC = () => {
                                         />
 
                                         <div className="flex-1 text-center sm:text-left ">
-                                            <h3 className="text-[#64ffda] text-lg sm:text-xl md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
-                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-sm mb-4 ${expandedProject === project.id ? '' : 'line-clamp-3'}`}>
+                                            <h3 className="text-[#64ffda] text-md sm:text-md md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
+                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-base mb-4 text-justify ${expandedProject === project.id ? '' : 'line-clamp-4 lg:line-clamp-3 xl:line-clamp-3'}`}>
                                                 {project.description}
                                             </p>
                                             <button

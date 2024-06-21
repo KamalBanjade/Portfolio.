@@ -25,30 +25,34 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, onRating }) => {
     setHoveredRating(null);
   };
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, event: React.MouseEvent | React.TouchEvent) => {
+    event.stopPropagation(); // Stop the event propagation here
     onRating(index);
   };
 
   return (
-    <div className="flex">
+    <div className="flex space-x-1">
       {Array.from({ length: 5 }, (_, index) => (
         <span
           key={index}
           onMouseEnter={() => handleMouseEnter(index + 1)}
           onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick(index + 1)}
-          className="cursor-pointer text-xl sm:text-2xl mx-0.5"
+          onClick={(event) => handleClick(index + 1, event)}
+          onTouchStart={(event) => handleClick(index + 1, event)}
+          className={`cursor-pointer text-sm transition-transform duration-300 transform ${
+            hoveredRating !== null ? (hoveredRating > index ? 'scale-125 text-teal-600' : 'text-gray-300') : currentRating > index ? 'scale-125 text-teal-600' : 'text-gray-300'
+          }`}
         >
           {hoveredRating !== null ? (
             hoveredRating > index ? (
-              <AiFillStar className="text-teal-600" />
+              <AiFillStar />
             ) : (
-              <AiOutlineStar className="text-white" />
+              <AiOutlineStar />
             )
-          ) : currentRating > index ? ( 
-            <AiFillStar className="text-teal-600" />
+          ) : currentRating > index ? (
+            <AiFillStar />
           ) : (
-            <AiOutlineStar className="text-white" />
+            <AiOutlineStar />
           )}
         </span>
       ))}

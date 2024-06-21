@@ -21,7 +21,6 @@ const Gallery: React.FC = () => {
   const [showOverlay, setShowOverlay] = useState(true);
   const galleryRef = useRef<HTMLDivElement>(null);
   const [slides, setSlides] = useState<Slide[]>([]);
-
   const bigScreenSlides: Slide[] = [
     {
       images: [
@@ -79,7 +78,6 @@ const Gallery: React.FC = () => {
       ]
     }
   ];
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -97,40 +95,6 @@ const Gallery: React.FC = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const handlePrevious = () => {
-    if (!isAnimating) {
-    setIsAnimating(true);
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
-    setTimeout(() => {
-    setIsAnimating(false);
-    }, 700);
-    }
-    };
-    
-    const handleNext = () => {
-    if (!isAnimating) {
-    setIsAnimating(true);
-    setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
-    setTimeout(() => {
-    setIsAnimating(false);
-    }, 700);
-    }
-    };
-    
-    const handleIndicatorClick = (index: number) => {
-    if (!isAnimating && currentIndex !== index) {
-    setIsAnimating(true);
-    setCurrentIndex(index);
-    setTimeout(() => {
-    setIsAnimating(false);
-    }, 700);
-    }
-    };
-
-  const handleEyeClick = (index: number) => {
-    setModalImageSrc(slides[currentIndex].images[index].src);
-    openModal();
-  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -158,6 +122,78 @@ const Gallery: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [isAnimating, currentIndex]);
+
+  const handlePrevious = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 700);
+    }
+  };
+
+  const handleNext = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 700);
+    }
+  };
+
+  const handleIndicatorClick = (index: number) => {
+    if (!isAnimating && currentIndex !== index) {
+      setIsAnimating(true);
+      setCurrentIndex(index);
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 700);
+    }
+  };
+
+  const handleEyeClick = (index: number) => {
+    setModalImageSrc(slides[currentIndex].images[index].src);
+    openModal();
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touchStartX = e.touches[0].clientX;
+    const touchStartY = e.touches[0].clientY;
+    const startCoords = { x: touchStartX, y: touchStartY };
+
+    const handleTouchMove = (ev: TouchEvent) => {
+      const touchEndX = ev.touches[0].clientX;
+      const touchEndY = ev.touches[0].clientY;
+      const endCoords = { x: touchEndX, y: touchEndY };
+
+      handleSwipe(startCoords, endCoords);
+    };
+
+    const handleTouchEnd = () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+  };
+
+  const handleSwipe = (startCoords: { x: number; y: number }, endCoords: { x: number; y: number }) => {
+    const dx = endCoords.x - startCoords.x;
+    const dy = endCoords.y - startCoords.y;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    if (absDx > absDy && absDx > 30) {
+      if (dx > 0) {
+        handlePrevious();
+      } else {
+        handleNext();
+      }
+    }
+  };
 
   const renderGridItems = (images: { src: string; title: string; description: string; }[]) => (
     <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
@@ -198,21 +234,21 @@ const Gallery: React.FC = () => {
             transition: filter 0.3s ease;
           }
         `}</style>
-       <section className="flex flex-col sm:flex-row justify-center items-center space-y-8 sm:space-y-0 sm:space-x-8 md:space-x-10">
-        <div className="flex-1">
-          <div className="line-container mb-6">
-            <div className="line start"></div>
-            <h2 className="text-[#64ffda] text-3xl md:text-4xl font-bold title">
-              <div className='text-center lg:text-left sm:text-center'>
-                <span className="text-white">Gallery</span>
-              </div>
-            </h2>
-            <div className="line end"></div>
-          </div>
+        <section className="flex flex-col sm:flex-row justify-center items-center space-y-8 sm:space-y-0 sm:space-x-8 md:space-x-10">
+          <div className="flex-1">
+            <div className="line-container mb-6">
+              <div className="line start"></div>
+              <h2 className="text-[#64ffda] text-3xl md:text-4xl font-bold title">
+                <div className='text-center lg:text-left sm:text-center'>
+                  <span className="text-white">Gallery</span>
+                </div>
+              </h2>
+              <div className="line end"></div>
+            </div>
             <p className="text-[#8892b0] mb-8 leading-relaxed text-sm sm:text-base md:text-md text-center pl-7">
               Embark on a visual journey through my gallery. Each image captures a unique moment, a story waiting to be told, a piece of beauty longing to be shared.
             </p>
-            <div className="w-full max-w-auto mx-auto overflow-hidden relative">
+            <div className="w-full max-w-auto mx-auto overflow-hidden relative" onTouchStart={handleTouchStart}>
               {showOverlay && (
                 <button
                   onClick={() => setShowOverlay(!showOverlay)}
