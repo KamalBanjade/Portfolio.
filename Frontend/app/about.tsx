@@ -25,16 +25,16 @@ const About: React.FC = () => {
             </div>
             <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center lg:space-x-8 md:space-x-10 text-justify">
               <div className="flex-1">
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-sm sm:text-base md:text-base pl-2 lg:pl-6">
+                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
                   Hello! I'm Kamal Banjade, a passionate web creator with a journey that began in 2018, ignited by the thrill of building my very first form. The rush of accomplishment from that moment set me on a path of relentless learning and discovery in the realm of HTML, CSS, and beyond. I've since dedicated myself to learning everything, from the basics of coding to the latest technologies and best practices.
                 </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-sm sm:text-base md:text-base pl-2 lg:pl-6">
+                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
                   But my world isn't confined to code alone. A vibrant spectrum of creative interests fuels my imagination and enriches my work. With my camera, I capture the world in a tapestry of colors and viewpoints, reflecting its myriad hues and perspectives. Philosophy and literature are my intellectual playgrounds, offering boundless inspiration and fresh paradigms of thought. Writing poetry and stories is my canvas for emotional and creative expression, while music is my sanctuary, where playing various instruments brings me profound joy and tranquility.
                 </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-sm sm:text-base md:text-base pl-2 lg:pl-6">
+                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
                   Collaboration and communication are at the heart of my ethos. I believe that exceptional web development transcends mere coding; it's about forging deep connections with clients, and team members, understanding their visions and needs, and crafting solutions that not only meet but exceed expectations.
                 </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-sm sm:text-base md:text-base pl-2 lg:pl-6">
+                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
                   This blend of technical expertise and creative passion defines who I am as a developer and a person, always striving to weave beauty, functionality, and innovation into the fabric of the web.
                 </p>
               </div>

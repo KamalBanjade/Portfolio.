@@ -136,7 +136,7 @@ I'll overcome obstacles, shining bright.`
             </h2>
             <div className="line end"></div>
           </div>
-                <p className="text-[#8892b0] mb-2 leading-relaxed text-sm sm:text-base md:text-md pl-7">
+                <p className="text-[#8892b0] mb-2 leading-relaxed text-xs sm:text-base md:text-md pl-7">
                     Explore a curated collection of my favorite poems.
                 </p>
                 <div className="h-4" />

@@ -128,7 +128,7 @@ const Projects: React.FC = () => {
 
                                         <div className="flex-1 text-center sm:text-left ">
                                             <h3 className="text-[#64ffda] text-md sm:text-md md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
-                                            <p className={`text-[#8892b0] text-sm sm:text-base md:text-lg lg:text-base mb-4 text-justify ${expandedProject === project.id ? '' : 'line-clamp-4 lg:line-clamp-3 xl:line-clamp-3'}`}>
+                                            <p className={`text-[#8892b0] text-xs sm:text-base md:text-lg lg:text-base mb-4 text-justify ${expandedProject === project.id ? '' : 'line-clamp-4 lg:line-clamp-3 xl:line-clamp-3'}`}>
                                                 {project.description}
                                             </p>
                                             <button

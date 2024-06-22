@@ -245,7 +245,7 @@ const Gallery: React.FC = () => {
               </h2>
               <div className="line end"></div>
             </div>
-            <p className="text-[#8892b0] mb-8 leading-relaxed text-sm sm:text-base md:text-md text-center pl-7">
+            <p className="text-[#8892b0] mb-8 leading-relaxed text-xs sm:text-base md:text-md pl-7 text-justify">
               Embark on a visual journey through my gallery. Each image captures a unique moment, a story waiting to be told, a piece of beauty longing to be shared.
             </p>
             <div className="w-full max-w-auto mx-auto overflow-hidden relative" onTouchStart={handleTouchStart}>
