@@ -77,11 +77,11 @@ const App: React.FC = () => {
       {!loading && (
         <div ref={appRef}>
        <Navbar />
-       <div className="h-24 md:h-28" />
+       <div className="h-20 md:h-24" />
        <section id="home">
          <Home />
        </section>
-       <div className="h-24 md:h-20" />
+       <div className="h-20 md:h-20" />
        <section id="about"><About /></section>
        <div className="h-20 md:h-20" />
        <section id="gallery"><Gallery /></section>

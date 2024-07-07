@@ -1,88 +1,116 @@
-/* Keyframes for animations */
 @keyframes overlayShow {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  from {
+    opacity: 0;
   }
-  
-  @keyframes overlayHide {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
+  to {
+    opacity: 1;
   }
-  
-  @keyframes contentShow {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+}
+
+@keyframes overlayHide {
+  from {
+    opacity: 1;
   }
-  
-  @keyframes contentHide {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(100%);
-      opacity: 0;
-    }
+  to {
+    opacity: 0;
   }
-  
-  /* Overlay animations */
-  .overlay-animation {
-    animation: overlayShow 0.3s ease-in-out forwards;
+}
+
+@keyframes contentShow {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  
-  .overlay-animation.hide {
-    animation: overlayHide 0.3s ease-in-out forwards;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  /* Content animations */
-  .content-animation {
-    animation: contentShow 0.3s ease-in-out forwards;
+}
+
+@keyframes contentHide {
+  from {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .content-animation.hide {
-    animation: contentHide 0.3s ease-in-out forwards;
+  to {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  
-  /* Sheet content styling */
+}
+
+/* Overlay animations */
+.overlay-animation {
+  animation: overlayShow 0.4s ease-in-out forwards;
+}
+
+.overlay-animation.hide {
+  animation: overlayHide 0.4s ease-in-out forwards;
+}
+
+/* Content animations */
+.content-animation {
+  animation: contentShow 0.4s ease-in-out forwards;
+}
+
+.content-animation.hide {
+  animation: contentHide 0.4s ease-in-out forwards;
+}
+
+/* Sheet content styling */
+.sheet-content {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0a192f, #0d2035);
+  color: white;
+  transition: height 0.4s ease, transform 0.4s ease;
+}
+
+/* Header and footer styling */
+.sheet-header, .sheet-footer {
+  background: linear-gradient(135deg, #0a192f, #102d4c);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Blur effect for the overlay */
+.blur-background {
+  backdrop-filter: blur(2px);
+  transition: backdrop-filter 0.4s ease;
+}
+
+@media (max-width: 768px) {
   .sheet-content {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    background: var(--background-color, #0a192f);
-    color: white;
-    transition: height 0.3s ease, transform 0.3s ease;
+    height: auto;
   }
-  
-  /* Header and footer styling */
-  .sheet-header, .sheet-footer {
-    background: var(--header-footer-background, #0a192f);
-    backdrop-filter: blur(6px);
-    padding: 0.5rem;
-    border-radius: 12px 12px 0 0;
-  }
-  
-  /* Blur effect for the overlay */
-  .blur-background {
-    backdrop-filter: blur(2px);
-    transition: backdrop-filter 0.3s ease;
-  }
-  
-  @media (max-width: 768px) {
-    .sheet-content {
-      height: auto;
-    }
-  }
-  
+}
+
+/* Button styling */
+.button {
+  background-color: #64ffda;
+  color: #0a192f;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+  background-color: #52e0c6;
+  transform: scale(1.05);
+}
+
+/* Link styling */
+.link {
+  color: #64ffda;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.link:hover {
+  color: #52e0c6;
+  transform: scale(1.05);
+}

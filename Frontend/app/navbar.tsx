@@ -196,33 +196,32 @@ const Navbar: React.FC = () => {
                 </SheetContent>
             </Sheet>
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
-                <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#0a192f] transform transition-transform duration-300 ease-in-out w-full md:w-auto md:right-0 md:top-0 md:h-full md:max-w-[30vw] md:fixed z-50">
-
-                    <div className="p-2 flex flex-col items-center text-center space-y-2 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform  border-t border-b ">
+                <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#233554] transform transition-transform duration-500 ease-in-out w-full md:w-auto md:right-0 md:top-0 md:h-full md:max-w-[30vw] md:fixed z-50 shadow-2xl">
+                    <div className="p-4 flex flex-col items-center text-center space-y-4 bg-gradient-to-r from-[#0a192f]  rounded-lg shadow-2xl transition duration-500 ease-in-out transform border-t-2 border-b-2 border-[#64ffda]">
                         <h2 className="text-lg md:text-xl font-bold mb-1">
                             <span className="text-[#64ffda]">Resume</span>
                         </h2>
-                        <p className="text-[#a8b2d1] text-sm md:text-base">
+                        <p className="text-[#a8b2d1] text-sm md:text-md">
                             Please find my resume attached. Looking forward to connecting!
                         </p>
-                        <div className="w-full flex justify-center rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out">
+                        <div className="w-full flex justify-center rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out shadow-lg">
                             <iframe
                                 src="/resume.pdf"
                                 className="h-[40vh] w-[30vh] md:h-[45vh] md:w-[35vh] rounded-md border-2 border-[#64ffda]"
-                                style={{ border: 'none' }}
+                                style={{ border: "none" }}
                             />
                         </div>
-                        <div className="md:h-8" />
+                        <div className="md:h-4" />
                         <a
                             href="/resume.pdf"
                             download="kamal's_resume.pdf"
-                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-1 px-3 md:py-2 md:px-5 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 flex items-center space-x-2"
+                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-1 px-4 md:py-2 md:px-6 rounded-lg border-2 border-[#64ffda] transition duration-300 transform hover:scale-110 flex items-center space-x-2 "
                         >
                             <span>Resume</span> <FaDownload />
                         </a>
                     </div>
-
                 </SheetContent>
+
             </Sheet>
 
         </nav>

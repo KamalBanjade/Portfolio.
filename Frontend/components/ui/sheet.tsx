@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { IoCloseSharp } from "react-icons/io5";
 import { cn } from "@/lib/utils";
 import "./sheet.css";
 
@@ -25,7 +25,7 @@ const SheetOverlay = React.forwardRef<
   <Dialog.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-40 bg-black/70 transition-opacity duration-300",
+      "fixed inset-0 z-40 bg-black/70 transition-opacity duration-400",
       isVisible ? "opacity-100 blur-background" : "opacity-0",
       className
     )}
@@ -67,7 +67,7 @@ const SheetContent = React.forwardRef<
       <Dialog.Content
         ref={ref}
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 flex flex-col rounded-t-lg bg-white transition-transform duration-300 ease-in-out md:top-0 md:right-0 md:left-auto md:bottom-auto md:h-full md:max-w-md sheet-content",
+          "fixed inset-x-0 bottom-0 z-50 flex flex-col rounded-t-lg bg-white transition-transform duration-400 ease-in-out md:top-0 md:right-0 md:left-auto md:bottom-auto md:h-full md:max-w-md sheet-content content-animation",
           className
         )}
         style={{
@@ -80,14 +80,22 @@ const SheetContent = React.forwardRef<
         {...props}
       >
         <SheetClose asChild>
-          <button
-            className="absolute right-4 top-4 p-1 rounded-full text-white hover:bg-teal-600 transition-colors z-50"
+        <button
+            className="absolute right-4 top-4 p-1 text-teal-white transition-colors z-50 hover:text-teal-600"
             aria-label="Close"
           >
-            <Cross2Icon />
+            <div className="block md:hidden">
+              <IoCloseSharp size={18} />
+            </div>
+            <div className="hidden md:block lg:hidden">
+              <IoCloseSharp size={22} />
+            </div>
+            <div className="hidden lg:block">
+              <IoCloseSharp size={26} />
+            </div>
           </button>
         </SheetClose>
-        <div className="sheet-content p-4 overflow-y-auto">{children}</div>
+        <div className="sheet-content p-2 overflow-y-auto">{children}</div>
       </Dialog.Content>
     </SheetPortal>
   );
@@ -99,7 +107,7 @@ const SheetHeader = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)}
+    className={cn("grid gap-1.5 p-4 text-center sm:text-left sheet-header", className)}
     {...props}
   />
 );
@@ -110,7 +118,7 @@ const SheetFooter = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+    className={cn("mt-auto flex flex-col gap-2 p-4 sheet-footer", className)}
     {...props}
   />
 );
@@ -153,4 +161,4 @@ export {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-};
+}
