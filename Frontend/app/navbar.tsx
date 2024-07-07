@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { SheetTrigger, SheetContent, Sheet } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { FaBars, FaDownload } from 'react-icons/fa';
-import Cookies from '@/components/js-cookie'; // Updated import path
+import Cookies from '@/components/js-cookie';
 
 const Navbar: React.FC = () => {
-const [activeSection, setActiveSection] = useState<string>('home');
-const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
-const [sheetView, setSheetView] = useState<string>('');
-const sections = ['about', 'gallery', 'skills', 'blogs'];
+    const [startY, setStartY] = useState(null);
+    const [translateY, setTranslateY] = useState(0);
+    const sheetRef = useRef(null);
+    const [activeSection, setActiveSection] = useState<string>('home');
+    const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
+    const [sheetView, setSheetView] = useState<string>('');
+    const sections = ['about', 'gallery', 'skills', 'blogs'];
 
     const scrollToSection = (sectionId: string) => {
         setActiveSection(sectionId);
@@ -21,18 +24,18 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
             if (screenWidth <= 768) {
                 offsetAdjustment = -10;
             }
-    
+
             const sectionTop = section.offsetTop - navbarHeight + offsetAdjustment;
             const scrollOptions: ScrollToOptions = {
                 top: sectionTop,
                 behavior: 'smooth'
             };
-    
+
             window.scrollTo(scrollOptions);
             window.history.replaceState(null, '', `#${sectionId}`);
         }
     };
-    
+
     useEffect(() => {
         const handleScroll = () => {
             const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
@@ -41,17 +44,16 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                 setActiveSection('home');
                 return;
             }
-    
-    
+
             let foundActiveSection = false;
-    
+
             for (const sectionId of sections) {
                 const section = document.getElementById(sectionId);
                 if (section) {
                     const sectionTop = section.offsetTop - navbarHeight;
                     const sectionHeight = section.offsetHeight;
-    
-                    if (windowScrollY >= sectionTop - 60 && windowScrollY < sectionTop + sectionHeight - 60) { // Adjust for navbar height
+
+                    if (windowScrollY >= sectionTop - 60 && windowScrollY < sectionTop + sectionHeight - 60) {
                         setActiveSection(sectionId);
                         window.history.replaceState(null, '', `#${sectionId}`);
                         foundActiveSection = true;
@@ -63,35 +65,34 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                 setActiveSection('');
             }
         };
-    
+
         window.addEventListener('scroll', handleScroll);
         handleScroll();
-    
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [sections]);
-    
+
     useEffect(() => {
         Cookies.set('activeSection', activeSection);
         window.history.replaceState(null, '', `#${activeSection}`);
     }, [activeSection]);
-    
-    
+
     const openSheet = (view: string) => {
         setSheetView(view);
         setSheetOpen(true);
         window.history.replaceState(null, '', `#${view}`);
     };
-    
+
     const closeSheet = () => {
         setSheetOpen(false);
         const currentSection = activeSection || 'home';
         window.history.replaceState(null, '', `#${currentSection}`);
     };
-    
+
     return (
-        <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800/50 dark:shadow-gray-800 fade-in ">
+        <nav className="sticky top-0 z-10 bg-[#0a192f] bg-opacity-95 flex justify-between items-center py-2 md:py-4 px-8 md:px-12 lg:px-16 shadow-lg shadow-gray-800/50 dark:shadow-gray-800 fade-in">
             <Link href="#home" passHref>
                 <button
                     id="home"
@@ -126,11 +127,11 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                         opacity: 1;
                     }
                 }
-    
+
                 .fade-in {
                     animation: fadeIn 1s ease-in-out;
                 }
-    
+
                 .home-button .hex-svg:hover .hexagon {
                     stroke: #64ffda;
                 }
@@ -141,9 +142,9 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                     transform: scale(1.2);
                 }
             `}</style>
-    
-            <div className="hidden md:flex items-center space-x-4 md:space-x-6 lg:space-x-8 ">
-            {sections.map(sectionId => (
+
+            <div className="hidden md:flex items-center space-x-4 md:space-x-6 lg:space-x-8">
+                {sections.map(sectionId => (
                     <Link key={sectionId} href={`#${sectionId}`} passHref>
                         <span
                             onClick={() => scrollToSection(sectionId)}
@@ -154,7 +155,7 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                     </Link>
                 ))}
                 <button
-                    className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 "
+                    className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-3 px-7 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105"
                     onClick={() => openSheet('resume')}
                 >
                     Resume
@@ -169,17 +170,17 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
                 </SheetTrigger>
-    
-                <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out w-40 max-w-full">
-                    <div className="grid gap-2 py-4 pr-4">
-                        {sections.map(sectionId => (
+
+                <SheetContent className="bg-[#0a192f] transform transition-transform duration-300 ease-in-out w-auto max-w-full items-center">
+                    <div className="grid gap-1 py-2 pr-2">
+                        {sections.map((sectionId) => (
                             <Link key={sectionId} href={`#${sectionId}`} passHref>
                                 <span
                                     onClick={() => {
                                         scrollToSection(sectionId);
                                         setSheetOpen(false);
                                     }}
-                                    className={`flex justify-center items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'text-[#64ffda]' : 'text-[#ccd6f6]'} hover:text-[#64ffda]`}
+                                    className={`flex justify-center items-center py-2 text-lg font-semibold transition-transform duration-200 transform-gpu hover:scale-105 ${activeSection === sectionId ? 'animate-pulse text-[#64ffda]' : 'text-[#ccd6f6] hover:text-[#64ffda]'}`}
                                 >
                                     {sectionId.charAt(0).toUpperCase() + sectionId.slice(1)}
                                 </span>
@@ -194,33 +195,36 @@ const sections = ['about', 'gallery', 'skills', 'blogs'];
                     </div>
                 </SheetContent>
             </Sheet>
-    
             <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
-                <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#0a192f] transform transition-transform duration-300 ease-in-out w-full md:w-auto">
-                    <div className="p-4 flex flex-col items-center text-center space-y-4 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform hover:scale-100 hover:translate-y-1 fade-in">
-                        <h2 className="text-[#64ffda] text-xl md:text-2xl font-bold mb-2">
-                            <span className="text-#8892b0">Resume</span>
+                <SheetContent className="bg-gradient-to-r from-[#0a192f] to-[#0a192f] transform transition-transform duration-300 ease-in-out w-full md:w-auto md:right-0 md:top-0 md:h-full md:max-w-[30vw] md:fixed z-50">
+
+                    <div className="p-2 flex flex-col items-center text-center space-y-2 bg-gradient-to-r from-[#0a192f] to-[#0a192f] rounded-md shadow-xl transition duration-500 ease-in-out transform  border-t border-b ">
+                        <h2 className="text-lg md:text-xl font-bold mb-1">
+                            <span className="text-[#64ffda]">Resume</span>
                         </h2>
-                        <p className="text-#a8b2d1 text-base">
+                        <p className="text-[#a8b2d1] text-sm md:text-base">
                             Please find my resume attached. Looking forward to connecting!
                         </p>
-                        <div className="w-full flex justify-center shadow-lg rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out">
+                        <div className="w-full flex justify-center rounded-md overflow-hidden resume-iframe-container transition-transform duration-300 ease-in-out">
                             <iframe
                                 src="/resume.pdf"
-                                className="h-[57.5vh] w-[41vh] md:h-[56vh] md:w-[43vh] rounded-md border-2 border-[#64ffda]"
+                                className="h-[40vh] w-[30vh] md:h-[45vh] md:w-[35vh] rounded-md border-2 border-[#64ffda]"
                                 style={{ border: 'none' }}
                             />
                         </div>
+                        <div className="md:h-8" />
                         <a
                             href="/resume.pdf"
                             download="kamal's_resume.pdf"
-                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-2 px-5 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 flex items-center space-x-2"
+                            className="bg-transparent hover:bg-[#0a192f] hover:text-teal-500 font-semibold text-[#64ffda] py-1 px-3 md:py-2 md:px-5 rounded-md border border-[#64ffda] transition duration-300 transform hover:scale-105 flex items-center space-x-2"
                         >
-                            <span>Download Resume</span> <FaDownload />
+                            <span>Resume</span> <FaDownload />
                         </a>
                     </div>
+
                 </SheetContent>
             </Sheet>
+
         </nav>
     );
 };

@@ -1,124 +1,156 @@
-"use client"
-import * as React from "react"
-import * as SheetPrimitive from "@radix-ui/react-dialog"
-import { cva, type VariantProps } from "class-variance-authority"
-import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React, { useRef, useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Cross2Icon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
+import "./sheet.css";
 
-// Sheet components from Radix
-const Sheet = SheetPrimitive.Root
-const SheetTrigger = SheetPrimitive.Trigger
-const SheetClose = SheetPrimitive.Close
-const SheetPortal = SheetPrimitive.Portal
+interface CustomDialogProps extends Dialog.DialogProps {
+  shouldScaleBackground?: boolean;
+}
 
-// Overlay with smooth transitions and blur effect
+const Sheet = ({
+  shouldScaleBackground = true,
+  ...props
+}: CustomDialogProps) => <Dialog.Root {...props} />;
+Sheet.displayName = "Sheet";
+
+const SheetTrigger = Dialog.Trigger;
+const SheetPortal = Dialog.Portal;
+const SheetClose = Dialog.Close;
+
 const SheetOverlay = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <SheetPrimitive.Overlay
+  React.ElementRef<typeof Dialog.Overlay>,
+  React.ComponentPropsWithoutRef<typeof Dialog.Overlay> & { isVisible: boolean }
+>(({ className, isVisible, ...props }, ref) => (
+  <Dialog.Overlay
+    ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/80 backdrop-blur-sm transition-opacity duration-300",
+      "fixed inset-0 z-40 bg-black/70 transition-opacity duration-300",
+      isVisible ? "opacity-100 blur-background" : "opacity-0",
       className
     )}
     {...props}
-    ref={ref}
   />
-))
-SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
-
-
-// Keyframe animations for sheet content
-const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-white p-6 shadow-lg dark:bg-gray-950 transition-transform duration-300 transform data-[state=open]:scale-100 data-[state=closed]:scale-95",
-  {
-    variants: {
-      side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom: "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-1.5/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
-        right: "inset-y-0 right-0 h-full w-1.5/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
-      },
-    },
-    defaultVariants: {
-      side: "right",
-    },
-  }
-);
-
-// SheetContent component with keyframe animations and transition
-interface SheetContentProps
-  extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-  VariantProps<typeof sheetVariants> { }
+));
+SheetOverlay.displayName = Dialog.Overlay.displayName;
 
 const SheetContent = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Content>,
-  SheetContentProps
->(({ side = "right", className, children, ...props }, ref) => (
-  <SheetPortal>
-    <SheetOverlay />
-    <SheetPrimitive.Content
-      ref={ref}
-      className={cn(sheetVariants({ side }), className)}
-      {...props}
-      style={{ transition: 'transform 0.8s , opacity 0.8s  ease-in-out' }} 
-    >
-      {children}
-      <SheetPrimitive.Close className="absolute top-2 right-1 p-2 text-[#ccd6f6] hover:text-[#64ffda] font-extrabold transition-all duration-300 ease-in-out transform hover:scale-110 rounded-full">
-        <X className="h-6 w-8  stroke-current" strokeWidth={3} />
-        <span className="sr-only">Close</span>
-      </SheetPrimitive.Close>
+  React.ElementRef<typeof Dialog.Content>,
+  React.ComponentPropsWithoutRef<typeof Dialog.Content>
+>(({ className, children, ...props }, ref) => {
+  const [height, setHeight] = useState<number | string>("auto");
+  const startYRef = useRef(0);
+  const translateYRef = useRef(0);
 
-    </SheetPrimitive.Content>
-  </SheetPortal>
-));
-SheetContent.displayName = SheetPrimitive.Content.displayName
+  const handleDragStart = (event: React.TouchEvent) => {
+    startYRef.current = event.touches[0].clientY;
+  };
 
-// SheetHeader component
+  const handleDragMove = (event: React.TouchEvent) => {
+    const currentY = event.touches[0].clientY;
+    translateYRef.current = currentY - startYRef.current;
+    setHeight(`calc(100% - ${translateYRef.current}px)`);
+  };
+
+  const handleDragEnd = () => {
+    if (translateYRef.current > 100) {
+      setHeight("0");
+    } else {
+      setHeight("auto");
+      translateYRef.current = 0;
+    }
+  };
+
+  return (
+    <SheetPortal>
+      <SheetOverlay isVisible={true} />
+      <Dialog.Content
+        ref={ref}
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-50 flex flex-col rounded-t-lg bg-white transition-transform duration-300 ease-in-out md:top-0 md:right-0 md:left-auto md:bottom-auto md:h-full md:max-w-md sheet-content",
+          className
+        )}
+        style={{
+          height,
+          transform: `translateY(${Math.max(translateYRef.current, 0)}px)`,
+        }}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+        {...props}
+      >
+        <SheetClose asChild>
+          <button
+            className="absolute right-4 top-4 p-1 rounded-full text-white hover:bg-teal-600 transition-colors z-50"
+            aria-label="Close"
+          >
+            <Cross2Icon />
+          </button>
+        </SheetClose>
+        <div className="sheet-content p-4 overflow-y-auto">{children}</div>
+      </Dialog.Content>
+    </SheetPortal>
+  );
+});
+SheetContent.displayName = Dialog.Content.displayName;
+
 const SheetHeader = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex flex-col space-y-2 text-center sm:text-left", className)} {...props} />
-)
-SheetHeader.displayName = "SheetHeader"
+  <div
+    className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)}
+    {...props}
+  />
+);
+SheetHeader.displayName = "SheetHeader";
 
-// SheetFooter component
 const SheetFooter = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className)} {...props} />
-)
-SheetFooter.displayName = "SheetFooter"
+  <div
+    className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+    {...props}
+  />
+);
+SheetFooter.displayName = "SheetFooter";
 
-// SheetTitle component
 const SheetTitle = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
+  React.ElementRef<typeof Dialog.Title>,
+  React.ComponentPropsWithoutRef<typeof Dialog.Title>
 >(({ className, ...props }, ref) => (
-  <SheetPrimitive.Title ref={ref} className={cn("text-lg font-semibold text-gray-950 dark:text-gray-50", className)} {...props} />
-))
-SheetTitle.displayName = SheetPrimitive.Title.displayName
+  <Dialog.Title
+    ref={ref}
+    className={cn(
+      "text-lg font-semibold leading-none tracking-tight",
+      className
+    )}
+    {...props}
+  />
+));
+SheetTitle.displayName = Dialog.Title.displayName;
 
-// SheetDescription component
 const SheetDescription = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+  React.ElementRef<typeof Dialog.Description>,
+  React.ComponentPropsWithoutRef<typeof Dialog.Description>
 >(({ className, ...props }, ref) => (
-  <SheetPrimitive.Description ref={ref} className={cn("text-sm text-gray-500 dark:text-gray-400", className)} {...props} />
-))
-SheetDescription.displayName = SheetPrimitive.Description.displayName
+  <Dialog.Description
+    ref={ref}
+    className={cn("text-sm text-gray-600", className)}
+    {...props}
+  />
+));
+SheetDescription.displayName = Dialog.Description.displayName;
 
 export {
   Sheet,
-  SheetPortal,
-  SheetOverlay,
   SheetTrigger,
+  SheetPortal,
   SheetClose,
   SheetContent,
   SheetHeader,
   SheetFooter,
   SheetTitle,
   SheetDescription,
-}
+};
