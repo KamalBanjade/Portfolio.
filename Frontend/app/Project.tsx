@@ -47,7 +47,6 @@ const Projects: React.FC = () => {
             githubLink: 'https://github.com/KamalBanjade/Portfolio..git',
             projectLink: '#'
         }
-
     ];
 
     useEffect(() => {
@@ -56,6 +55,19 @@ const Projects: React.FC = () => {
         document.head.appendChild(style);
         return () => {
             document.head.removeChild(style);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setExpandedProject(null);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
 
@@ -128,7 +140,7 @@ const Projects: React.FC = () => {
 
                                         <div className="flex-1 text-center sm:text-left ">
                                             <h3 className="text-[#64ffda] text-md sm:text-md md:text-xl lg:text-md font-bold mb-4">{project.title}</h3>
-                                            <p className={`text-[#8892b0] text-xs sm:text-base md:text-lg lg:text-base mb-4 text-justify ${expandedProject === project.id ? '' : 'line-clamp-4 lg:line-clamp-3 xl:line-clamp-3'}`}>
+                                            <p className={`text-[#8892b0] text-xs sm:text-sm md:text-md lg:text-sm mb-4 text-justify ${expandedProject === project.id ? '' : 'line-clamp-4 lg:line-clamp-3 xl:line-clamp-3'}`}>
                                                 {project.description}
                                             </p>
                                             <button
