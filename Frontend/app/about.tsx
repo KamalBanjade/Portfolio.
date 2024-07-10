@@ -1,13 +1,40 @@
 import React, { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const About: React.FC = () => {
   const [hovered, setHovered] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  // Define the floating style with the correct typing
   const floatingStyle: React.CSSProperties = {
     animation: 'float 3s ease-in-out infinite',
     position: 'relative',
   };
+
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  const truncateText = (text: string, isExpanded: boolean) => {
+    const paragraphs = text.split('\n\n');
+    if (isExpanded || paragraphs.length <= 4) {
+      return paragraphs.map((p, index) => <p key={index} className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">{p}</p>);
+    }
+    return paragraphs.slice(0, 4).map((p, index) => (
+      <p key={index} className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">{p}</p>
+    )).concat(
+      <p key="more" className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">...</p>
+    );
+  };
+
+  const description = `
+Hello! I'm Kamal Banjade, a passionate web creator with a journey that began in 2018, ignited by the thrill of building my very first form. The rush of accomplishment from that moment set me on a path of relentless learning and discovery in the realm of HTML, CSS, and beyond. I've since dedicated myself to learning everything, from the basics of coding to the latest technologies and best practices.
+
+But my world isn't confined to code alone. A vibrant spectrum of creative interests fuels my imagination and enriches my work. With my camera, I capture the world in a tapestry of colors and viewpoints, reflecting its myriad hues and perspectives. Philosophy and literature are my intellectual playgrounds, offering boundless inspiration and fresh paradigms of thought. Writing poetry and stories is my canvas for emotional and creative expression, while music is my sanctuary, where playing various instruments brings me profound joy and tranquility.
+
+Collaboration and communication are at the heart of my ethos. I believe that exceptional web development transcends mere coding; it's about forging deep connections with clients, and team members, understanding their visions and needs, and crafting solutions that not only meet but exceed expectations.
+
+This blend of technical expertise and creative passion defines who I am as a developer and a person, always striving to weave beauty, functionality, and innovation into the fabric of the web.
+  `;
 
   return (
     <div className="fadeIn">
@@ -25,30 +52,27 @@ const About: React.FC = () => {
             </div>
             <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center lg:space-x-8 md:space-x-10 text-justify">
               <div className="flex-1">
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
-                  Hello! I'm Kamal Banjade, a passionate web creator with a journey that began in 2018, ignited by the thrill of building my very first form. The rush of accomplishment from that moment set me on a path of relentless learning and discovery in the realm of HTML, CSS, and beyond. I've since dedicated myself to learning everything, from the basics of coding to the latest technologies and best practices.
-                </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
-                  But my world isn't confined to code alone. A vibrant spectrum of creative interests fuels my imagination and enriches my work. With my camera, I capture the world in a tapestry of colors and viewpoints, reflecting its myriad hues and perspectives. Philosophy and literature are my intellectual playgrounds, offering boundless inspiration and fresh paradigms of thought. Writing poetry and stories is my canvas for emotional and creative expression, while music is my sanctuary, where playing various instruments brings me profound joy and tranquility.
-                </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
-                  Collaboration and communication are at the heart of my ethos. I believe that exceptional web development transcends mere coding; it's about forging deep connections with clients, and team members, understanding their visions and needs, and crafting solutions that not only meet but exceed expectations.
-                </p>
-                <p className="text-[#8892b0] mb-6 leading-relaxed text-xs sm:text-base md:text-base pl-2 lg:pl-6">
-                  This blend of technical expertise and creative passion defines who I am as a developer and a person, always striving to weave beauty, functionality, and innovation into the fabric of the web.
-                </p>
+                <div className={`about-text ${expanded ? 'expanded' : 'collapsed'}`} onClick={toggleExpand} style={{ cursor: 'pointer' }}>
+                  {truncateText(description, expanded)}
+                </div>
+                <div className="text-center sm:text-left mt-4">
+                  <button className="text-teal-500 hover:text-teal-400 transition-colors duration-300 flex items-center text-sm lg:hidden" onClick={(e) => { e.stopPropagation(); toggleExpand(); }}>
+                    {expanded ? (
+                      <>
+                        Show Less <FaChevronUp className="ml-1" />
+                      </>
+                    ) : (
+                      <>
+                        Read More <FaChevronDown className="ml-1" />
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
               <div className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-start mb-8 lg:mb-0" style={floatingStyle}>
                 <div className="w-48 h-48 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-64 lg:h-64 overflow-hidden rounded-lg shadow-lg relative hover-effect">
                   <div className="absolute inset-0 bg-[#0a192f] opacity-70 rounded-lg transition-opacity duration-300 ease-in-out z-10 hover:opacity-0"></div>
-                  <img
-                    loading="lazy"
-                    alt="Kamal Banjade"
-                    className={`object-cover w-full h-full rounded-lg z-20 ${hovered ? 'object-contain' : ''}`}
-                    src='/hehe.png'
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                  />
+                  <img loading="lazy" alt="Kamal Banjade" className={`object-cover w-full h-full rounded-lg z-20 ${hovered ? 'object-contain' : ''}`} src='/hehe.png' onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} />
                 </div>
               </div>
             </div>
@@ -85,6 +109,24 @@ const About: React.FC = () => {
 
         .fadeIn {
           animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .about-text.collapsed {
+          display: -webkit-box;
+          -webkit-line-clamp: 14;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .about-text.expanded {
+          display: block;
+        }
+
+        @media (min-width: 1024px) {
+          .about-text.collapsed {
+            display: block;
+          }
         }
       `}</style>
     </div>
