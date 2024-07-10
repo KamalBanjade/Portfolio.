@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import './line.css';
+
 const Blogs: React.FC = () => {
     const [expandedBlog, setExpandedBlog] = useState<number | null>(null);
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -33,31 +34,31 @@ const Blogs: React.FC = () => {
     const blogs = [
         {
             id: 1,
-            title: 'The Duality of Twilight',
-            description: `As the day gently fades with whispered sighs,
-And the sky in evening's colors lies,
-Some find solace in twilight's warm embrace,
-While others grapple with a different face.
+            title: 'A Determined Quest',
+            description: `Far away from my parents' embrace, I chase my dreams,
+In a lonely city, where no bloodlines gleam.
+Demotivation washes over me in a sudden wave,
+But I rise above, determined to be brave.
 
-The sky, a canvas of vibrant hue,
-A reminder for some of their deep blues,
-Dreams unfulfilled, aspirations astray,
-In sunset's glow, they silently sway.
+Pollution fills the air, obscuring the sky,
+Yet I find solace in nature's gentle sigh.
+Academic stress and homesickness weigh me down,
+But I seek strength within, wearing resilience as a crown.
 
-Yearning for connection, warmth, and light,
-Amidst the crowd, feeling lost in the fight,
-The sunset's beauty sparks dreams anew,
-Yet doubts creep in, tearing at what's true.
+In this foreign realm, I stand tall and strong,
+Creating my own path amidst the throng.
+With dreams as my compass, I defy the strife,
+Navigating the challenges that define my life.
 
-Gratitude, a virtue, hard to find,
-Beneath beauty, life's trials entwined,
-Loneliness lurking in shadows near,
-In dusk's embrace, longing is clear.
+Though far from my parents' arms, love transcends,
+As I forge connections with newfound friends.
+Through trials and hurdles, I'll persevere,
+For my dreams, I'll fight with unwavering cheer.
 
-Mental battles hidden, fears untold,
-In twilight's quiet, they take hold,
-Entwining with sunset's warm embrace,
-Revealing stories in shared grace.`
+So in this lonely city, I'll carve my own way,
+Embracing challenges, come what may.
+With determination as my guiding light,
+I'll overcome obstacles, shining bright.`
         },
         {
             id: 2,
@@ -94,87 +95,94 @@ For they shape who we are, in life's grand decree.`
         },
         {
             id: 3,
-            title: 'A Determined Quest',
-            description: `Far away from my parents' embrace, I chase my dreams,
-In a lonely city, where no bloodlines gleam.
-Demotivation washes over me in a sudden wave,
-But I rise above, determined to be brave.
+            title: 'The Duality of Twilight',
+            description: `As day fades with whispers, in dusk's embrace,
+The sky, evening's hues, paints with grace.
+Some find solace in twilight's warm light,
+While others face shadows and fears at night.
 
-Pollution fills the air, obscuring the sky,
-Yet I find solace in nature's gentle sigh.
-Academic stress and homesickness weigh me down,
-But I seek strength within, wearing resilience as a crown.
+Sunset ignites dreams anew, whispering tales,
+Yet doubts creep in as daylight pales.
+Gratitude hides in life's trials, entwined leaves,
+In dusk's quiet, longing grieves.
 
-In this foreign realm, I stand tall and strong,
-Creating my own path amidst the throng.
-With dreams as my compass, I defy the strife,
-Navigating the challenges that define my life.
+Mental battles and fears lie in twilight,
+Stories of courage and gold in the night.
+Reflections on what's lost as day turns night,
+Hopes and fears meet in evening light.
 
-Though far from my parents' arms, love transcends,
-As I forge connections with newfound friends.
-Through trials and hurdles, I'll persevere,
-For my dreams, I'll fight with unwavering cheer.
+The silence of dusk, a soothing shroud,
+For some, serene peace; others, a cloud.
+Walking 'tween hope and despair, twilight's fold,
+Human care's there, warm and cold.
 
-So in this lonely city, I'll carve my own way,
-Embracing challenges, come what may.
-With determination as my guiding light,
-I'll overcome obstacles, shining bright.`
+As night descends, calm or fright we see,
+Some find peace in night, others yearn for plea.
+In twilight’s embrace, shadows and hopes race,
+In the sky's blue, human hues in twilight's space.`
         }
     ];
 
     return (
-   <div className="max-w-auto mx-auto sm:mx-auto md:mx-8 lg:mx-10 xl:mx-12 2xl:mx-16 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-6 md:p-10 shadow-xl relative transition duration-500 ease-in-out transform hover:translate-y-2" id="blogs">
-    <section className="flex flex-col sm:flex-row justify-center items-center space-y-8 sm:space-y-0 sm:space-x-8 md:space-x-10">
-
-        <div className="flex-1">
-          <div className="line-container mb-6">
-            <div className="line start"></div>
-            <h2 className="text-[#64ffda] text-3xl md:text-4xl font-bold title">
-              <div className='text-center lg:text-left sm:text-center'>
-                <span className="text-white">Blogs</span>
-              </div>
-            </h2>
-            <div className="line end"></div>
-          </div>
-                <p className="text-[#8892b0] mb-2 leading-relaxed text-xs sm:text-base md:text-md pl-7">
-                    Explore a curated collection of my favorite poems.
-                </p>
-                <div className="h-4" />
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 justify-items-center ">
-                    {blogs.map(blog => (
-                      
-                         <div
-                            key={blog.id}
-                            ref={el => {
-                                sectionRefs.current[blog.id] = el;
-                            }}
-                            onClick={() => toggleExpand(blog.id)}
-                            className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-w-6xl w-full `}
+        <div className="max-w-auto mx-auto sm:mx-auto md:mx-8 lg:mx-10 xl:mx-12 2xl:mx-16 bg-gradient-to-r from-[#0a192f] to-[#0a192f] hover:to-[#12233d] rounded-lg p-6 md:p-10 shadow-xl relative transition duration-500 ease-in-out transform hover:translate-y-2" id="blogs">
+            <section className="flex flex-col sm:flex-row justify-center items-center space-y-8 sm:space-y-0 sm:space-x-8 md:space-x-10">
+                <div className="flex-1">
+                    <div className="line-container mb-6">
+                        <div className="line start"></div>
+                        <h2 className="text-[#64ffda] text-3xl md:text-4xl font-bold title">
+                            <div className='text-center lg:text-left sm:text-center'>
+                                <span className="text-white">Blogs</span>
+                            </div>
+                        </h2>
+                        <div className="line end"></div>
+                    </div>
+                    <p className="text-[#8892b0] mb-2 leading-relaxed text-xs sm:text-base md:text-md pl-7">
+                        Explore a curated collection of my favorite poems.
+                    </p>
+                    <div className="h-4" />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 justify-items-center">
+                        {blogs.map(blog => (
+                            <div
+                                key={blog.id}
+                                ref={el => {
+                                    sectionRefs.current[blog.id] = el;
+                                }}
+                                onClick={() => toggleExpand(blog.id)}
+                                className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-w-6xl w-full `}
                             >
-                            <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
-                            <div className="text-[#ccd6f6] pb-10">
-                                <p className="leading-relaxed text-xs sm:text-base md:text-sm mb-4" style={{ whiteSpace: 'pre-line' }}>
-                                    {truncateText(blog.description, expandedBlog === blog.id)}
-                                </p>
-                                <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
-                                    <span className="text-[#64ffda] mb-1 text-xs">
-                                        {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
-                                    </span>
-                                    <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
-                                        {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
+                                <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
+                                <div className="text-[#ccd6f6] pb-10">
+                                    <p className="leading-relaxed text-xs sm:text-base md:text-sm mb-4 poem-text" style={{ whiteSpace: 'pre-line' }}>
+                                        {truncateText(blog.description, expandedBlog === blog.id)}
+                                    </p>
+                                    <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
+                                        <span className="text-[#64ffda] mb-1 text-xs">
+                                            {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
+                                        </span>
+                                        <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
+                                            {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
-);
-
-    
+            </section>
+            <style jsx>{`
+                .poem-text {
+                font-family: 'Roboto Slab', Roboto;
+                    color: #e6e6e6;
+                    padding: 10px;
+                    border-radius: 2px;
+                    border-left: 2px solid #64ffda;
+                    line-height: auto;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                    transition: background 0.3s ease, color 0.3s ease;
+                }
+            `}</style>
+        </div>
+    );
 };
 
 export default Blogs;
