@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import StarRating from './StarRating'; 
+import StarRating from './StarRating';
 import Cookies from '@/components/js-cookie';
 
 interface ModalProps {
@@ -14,7 +14,17 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
   const [rating, setRating] = useState(0); // State to store rating
   const modalRef = useRef<HTMLDivElement>(null);
 
+  const toggleBodyOverflow = (isOpen: boolean) => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  };
+
   useEffect(() => {
+    toggleBodyOverflow(isOpen);
+
     if (isOpen) {
       const img = new Image();
       img.src = imageSrc;
@@ -40,6 +50,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
         setRating(Number(savedRating));
       }
     }
+
+    return () => {
+      toggleBodyOverflow(false);
+    };
   }, [isOpen, imageSrc]);
 
   useEffect(() => {

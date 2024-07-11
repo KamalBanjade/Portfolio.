@@ -39,7 +39,7 @@ const Gallery: React.FC = () => {
     {
       images: [
         { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight'},
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight' },
         { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' }
       ]
     },
@@ -66,7 +66,7 @@ const Gallery: React.FC = () => {
         { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
         { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment' },
         { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight'}
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight' }
       ]
     },
     {
@@ -124,7 +124,7 @@ const Gallery: React.FC = () => {
   }, [isAnimating, currentIndex]);
 
   const handlePrevious = () => {
-    if (!isAnimating) {
+    if (!isAnimating && currentIndex !== 0) {
       setIsAnimating(true);
       setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
       setTimeout(() => {
@@ -199,11 +199,11 @@ const Gallery: React.FC = () => {
     <div className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 ${showOverlay ? 'pointer-events-none' : ''}`}>
       {images.map((image, index) => (
         <div className="relative group" key={index}>
-          <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+          <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
             <img
               src={image.src}
               alt={`Image ${index + 1}`}
-              className="aspect-[1/1] object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+              className="aspect-[1/1] object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
               <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
