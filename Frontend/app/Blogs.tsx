@@ -12,10 +12,10 @@ const Blogs: React.FC = () => {
 
     const truncateText = (text: string, isExpanded: boolean) => {
         const lines = text.split('\n');
-        if (isExpanded || lines.length <= 8) {
+        if (isExpanded || lines.length <= 7) {
             return text;
         }
-        return lines.slice(0, 8).join('\n') + '...';
+        return lines.slice(0, 7).join('\n') + '...';
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -140,7 +140,7 @@ In the sky's blue, human hues in twilight's space.`
                         Explore a curated collection of my favorite poems.
                     </p>
                     <div className="h-4" />
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 lg:gap-4 justify-items-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
                         {blogs.map(blog => (
                             <div
                                 key={blog.id}
@@ -148,22 +148,23 @@ In the sky's blue, human hues in twilight's space.`
                                     sectionRefs.current[blog.id] = el;
                                 }}
                                 onClick={() => toggleExpand(blog.id)}
-                                className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-w-6xl w-full `}
+                                className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-w-auto w-full `}
                             >
                                 <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
                                 <div className="text-[#ccd6f6] pb-10">
                                     <p className="leading-relaxed text-xs sm:text-base md:text-sm mb-4 poem-text" style={{ whiteSpace: 'pre-line' }}>
                                         {truncateText(blog.description, expandedBlog === blog.id)}
                                     </p>
-                                    <div className="absolute right-0 bottom-0 mb-4 mr-4 sm:mr-5 flex flex-col items-center cursor-pointer">
-                                        <span className="text-[#64ffda] mb-1 text-xs">
-                                            {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
-                                        </span>
-                                        <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
-                                            {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
-                                        </div>
+                                </div>
+                                <div className="absolute right-0 bottom-8 sm:bottom-8 mb-0 sm:mb-2 mr-4 sm:mr-5 flex items-center cursor-pointer">
+                                    <span className="text-[#64ffda] mr-2 text-xs">
+                                        {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
+                                    </span>
+                                    <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
+                                        {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
                                     </div>
                                 </div>
+
                             </div>
                         ))}
                     </div>
@@ -171,14 +172,24 @@ In the sky's blue, human hues in twilight's space.`
             </section>
             <style jsx>{`
                 .poem-text {
-                font-family: 'Roboto Slab', Roboto;
+                    font-family: 'Roboto Slab', Roboto, sans-serif;
                     color: #e6e6e6;
-                    padding: 10px;
-                    border-radius: 2px;
-                    border-left: 2px solid #64ffda;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    border-left: 4px solid #64ffda;
                     line-height: auto;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-                    transition: background 0.3s ease, color 0.3s ease;
+                    background: #0a192f;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .poem-text:hover {
+                    background: #12233d;
+                    color: #ffffff;
+                    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+               
+
                 }
             `}</style>
         </div>
