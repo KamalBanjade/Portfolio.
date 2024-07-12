@@ -12,10 +12,10 @@ const Blogs: React.FC = () => {
 
     const truncateText = (text: string, isExpanded: boolean) => {
         const lines = text.split('\n');
-        if (isExpanded || lines.length <= 7) {
+        if (isExpanded || lines.length <= 8) {
             return text;
         }
-        return lines.slice(0, 7).join('\n') + '...';
+        return lines.slice(0, 8).join('\n') + '...';
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -147,51 +147,77 @@ In the sky's blue, human hues in twilight's space.`
                                 ref={el => {
                                     sectionRefs.current[blog.id] = el;
                                 }}
-                                onClick={() => toggleExpand(blog.id)}
-                                className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[19rem] sm:h-[19rem] md:h-[35rem] lg:h-[24rem]'} mx-w-auto w-full `}
+                                className={`bg-gradient-to-r from-[#12233d] to-[#0a192f] rounded-lg p-4 sm:p-6 shadow-lg relative transition duration-500 ease-in-out transform hover:scale-105 hover:bg-gradient-to-r hover:from-[#0e1a32] hover:to-[#12233d] ${expandedBlog === blog.id ? 'h-auto' : 'h-[18rem] sm:h-[19rem] md:h-[35rem] lg:h-[22rem]'} mx-w-auto w-full `}
                             >
                                 <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
-                                <div className="text-[#ccd6f6] pb-10">
-                                    <p className="leading-relaxed text-xs sm:text-base md:text-sm mb-4 poem-text" style={{ whiteSpace: 'pre-line' }}>
-                                        {truncateText(blog.description, expandedBlog === blog.id)}
+                                <div className="text-[#ccd6f6] pb-10 poem-text" style={{ position: 'relative' }}>
+                                    <p className={`leading-relaxed text-xs sm:text-base md:text-sm mb-4 ${expandedBlog === blog.id ? '' : 'clamped-text'}`} style={{ whiteSpace: 'pre-line' }}>
+                                        {blog.description}
                                     </p>
-                                </div>
-                                <div className="absolute right-0 bottom-7 lg:bottom-9 flex items-center cursor-pointer mb-0 sm:mb-2 mr-4 sm:mr-5">
-                                    <span className="text-[#64ffda] mr-2 text-xs sm:text-sm">
-                                        {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
-                                    </span>
-                                    <div className="p-1 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
-                                        {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
+                                    <div className="button-container" onClick={() => toggleExpand(blog.id)}>
+                                        <span className="text-[#64ffda] mr-2 text-xs sm:text-sm">
+                                            {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
+                                        </span>
+                                        <div className="p-1 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
+                                            {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
+                                        </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         ))}
+
                     </div>
                 </div>
             </section>
             <style jsx>{`
-                .poem-text {
-                    font-family: 'Roboto Slab', Roboto, sans-serif;
-                    color: #e6e6e6;
-                    padding: 15px 20px;
-                    border-radius: 5px;
-                    border-left: 4px solid #64ffda;
-                    line-height: auto;
-                    background: #0a192f;
-                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-                }
+  .poem-text {
+    font-family: 'Roboto Slab', Roboto, sans-serif;
+    color: #e6e6e6;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border-left: 4px solid #64ffda;
+    line-height: 1.5;
+    background: #0a192f;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
 
-                .poem-text:hover {
-                    background: #12233d;
-                    color: #ffffff;
-                    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-               
+.poem-text:hover {
+    background: #12233d;
+    color: #ffffff;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
 
-                }
+.clamped-text {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+    .clamped-text {
+        -webkit-line-clamp: 7;
+    }
+}
+
+@media (min-width: 769px) {
+    .clamped-text {
+        -webkit-line-clamp: 9;
+    }
+}
+
+.button-container {
+    margin-top: 1rem; 
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
             `}</style>
         </div>
     );
