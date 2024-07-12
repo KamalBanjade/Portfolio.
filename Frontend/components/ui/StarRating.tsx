@@ -1,3 +1,4 @@
+import { title } from 'process';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
@@ -20,6 +21,7 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, onRating }) => {
         return (
           <div key={index} className="relative flex items-center">
             <FaStar
+             title="Rate Image"   
               className={`cursor-pointer transition-colors duration-300 transform hover:scale-110 ${
                 ratingValue <= (hover || rating) ? 'text-teal-600' : 'text-gray-400'
               }`}

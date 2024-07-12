@@ -24,30 +24,30 @@ const Gallery: React.FC = () => {
   const bigScreenSlides: Slide[] = [
     {
       images: [
-        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight' },
-        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies ' },
-        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light" }
+        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight.' },
+        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies. ' },
+        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light." }
       ]
     },
     {
       images: [
-        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns' },
-        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
-        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment' }
+        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns.' },
+        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples.' },
+        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment.' }
       ]
     },
     {
       images: [
-        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight' },
-        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' }
+        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy.' },
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight.' },
+        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade.' }
       ]
     },
     {
       images: [
-        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection" },
-        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom' },
-        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven' }
+        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection." },
+        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom.' },
+        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven.' }
       ]
     }
   ];
@@ -55,26 +55,26 @@ const Gallery: React.FC = () => {
   const smallScreenSlides: Slide[] = [
     {
       images: [
-        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight' },
-        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies ' },
-        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light" },
-        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns' }
+        { src: '/sunset.jpg', title: 'Golden Dawn', description: 'A Symphony of Light and Flight.' },
+        { src: '/stupa.jpg', title: 'The Watching Eye', description: 'Awakened Serenity Beneath the Sunlit Skies. ' },
+        { src: '/mountains.png', title: 'Golden Horizon', description: "The Majestic Peaks Bathed in Dawn's Light." },
+        { src: '/bulbs.png', title: 'Whispers of Radiance', description: 'A Glowing Tapestry of Paper Lanterns.' }
       ]
     },
     {
       images: [
-        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples' },
-        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment' },
-        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy' },
-        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight' }
+        { src: '/lights.jpg', title: 'Rainy Midnight Melodies ', description: 'Streetlamp Symphony in Raindrop Ripples.' },
+        { src: '/traffic.png', title: 'Urban Serenity at Dusk', description: 'Evening City Street, Serene Moment.' },
+        { src: '/parrot.jpg', title: 'Emerald Majesty', description: 'A Jewel of Elegance in the Verdant Canopy.' },
+        { src: '/whiteflower.jpg', title: "Blossoms in Full Glory", description: 'White Blossoms In Spring Sunlight.' }
       ]
     },
     {
       images: [
-        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade' },
-        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection" },
-        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom' },
-        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven' }
+        { src: '/woods.jpeg', title: "Nature's Symphony ", description: 'A Sprawling Canopy in a Peaceful Glade.' },
+        { src: '/spotlight.png', title: 'Vibrant Glow', description: "Nature's Spotlight on Petal Perfection." },
+        { src: '/water droplets.png', title: "Petals of Elegance", description: 'A Dew-Kissed Rose in Full Bloom.' },
+        { src: '/Butterfly.jpg', title: 'Golden Wings', description: 'The Delicate Dance in golden Haven.' }
       ]
     }
   ];
@@ -205,7 +205,7 @@ const Gallery: React.FC = () => {
               alt={`Image ${index + 1}`}
               className="aspect-[1/1] object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-4 ">
               <h3 className="text-white text-xs sm:text-base font-semibold mb-1 transform translate-y-4 sm:translate-y-0 transition-transform duration-300 ease-in-out">
                 {image.title}
               </h3>
@@ -215,9 +215,10 @@ const Gallery: React.FC = () => {
             </div>
             <button
               onClick={() => handleEyeClick(index)}
-              className="absolute top-2 right-2 bg-[#0a192f] bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75 focus:outline-none transition duration-300 animate-pulse"
+              className="absolute top-2 right-2 bg-[#0a192f] bg-opacity-50 text-white rounded-full p-1 hover:bg-opacity-75 focus:outline-none transition duration-300 hover:animate-pulse"
+              title="view image"
             >
-              <AiOutlineEye className="text-sm sm:text-lg hover:text-teal-500" />
+              <AiOutlineEye className="text-sm lg:text-md hover:text-teal-500" />
             </button>
           </div>
         </div>

@@ -100,7 +100,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, imageSrc }) => {
       <div ref={modalRef} className="relative bg-white shadow-lg rounded-lg" style={{ width: imageDimensions.width, height: imageDimensions.height }}>
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-white rounded-full p-1 hover:bg-teal-600 focus:outline-none transition-colors duration-300 close-button"
+          className="absolute top-2 right-2 text-white rounded-full p-2 bg-teal-600 focus:outline-none transition-colors duration-300 close-button"
         >
           <AiOutlineClose className="text-xl sm:text-xs" />
           <span className="sr-only">Close</span>
