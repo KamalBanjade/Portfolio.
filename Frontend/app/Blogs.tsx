@@ -15,7 +15,7 @@ const Blogs: React.FC = () => {
         if (isExpanded || lines.length <= 7) {
             return text;
         }
-        return lines.slice(0, 7).join('\n') + '...';
+        return lines.slice(0, 8).join('\n') + '...';
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -103,8 +103,8 @@ While others face shadows and fears at night.
 
 Sunset ignites dreams anew, whispering tales,
 Yet doubts creep in as daylight pales.
-Gratitude hides in life's trials, entwined leaves,
-In dusk's quiet, longing grieves.
+Gratitude hides in trials, leaves entwined,
+In dusk's quiet, where longing grieves.
 
 Mental battles and fears lie in twilight,
 Stories of courage and gold in the night.
@@ -156,11 +156,11 @@ In the sky's blue, human hues in twilight's space.`
                                         {truncateText(blog.description, expandedBlog === blog.id)}
                                     </p>
                                 </div>
-                                <div className="absolute right-0 bottom-8 sm:bottom-8 mb-0 sm:mb-2 mr-4 sm:mr-5 flex items-center cursor-pointer">
-                                    <span className="text-[#64ffda] mr-2 text-xs">
+                                <div className="absolute right-0 bottom-8 sm:bottom-7 mb-0 sm:mb-2 mr-4 sm:mr-5 flex items-center cursor-pointer">
+                                    <span className="text-[#64ffda] mr-2 text-sm">
                                         {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
                                     </span>
-                                    <div className="p-2 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
+                                    <div className="p-1 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
                                         {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
                                     </div>
                                 </div>
