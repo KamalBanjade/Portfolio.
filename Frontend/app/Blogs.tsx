@@ -151,12 +151,17 @@ In the sky's blue, human hues in twilight's space.`
                             >
                                 <h3 className="text-[#64ffda] text-center text-lg sm:text-xl lg:text-xl font-bold mb-4">{blog.title}</h3>
                                 <div className="text-[#ccd6f6] pb-10 poem-text" style={{ position: 'relative' }}>
-                                    <p className={`leading-relaxed text-xs sm:text-base md:text-sm mb-4 ${expandedBlog === blog.id ? '' : 'clamped-text'}`} style={{ whiteSpace: 'pre-line' }}>
+                                    <div
+                                        className={`leading-relaxed text-xs sm:text-base md:text-sm mb-4 ${expandedBlog === blog.id ? '' : 'clamped-text'}`}
+                                        style={{ whiteSpace: 'pre-line' }}
+                                        onClick={() => toggleExpand(blog.id)}
+                                    >
                                         {blog.description}
-                                    </p>
+                                    </div>
+
                                     <div className="button-container" onClick={() => toggleExpand(blog.id)}>
                                         <span className="text-[#64ffda] mr-2 text-xs sm:text-sm">
-                                            {expandedBlog === blog.id ? 'Read Less' : 'Read More'}
+                                            {expandedBlog === blog.id ? 'Show Less' : 'Read More'}
                                         </span>
                                         <div className="p-1 bg-transparent hover:bg-[#0a192f] text-[#64ffda] rounded-full border border-[#64ffda] transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#64ffda]">
                                             {expandedBlog === blog.id ? <FaChevronUp /> : <FaChevronDown />}
