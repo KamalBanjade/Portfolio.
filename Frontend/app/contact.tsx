@@ -22,7 +22,7 @@ const Contact: React.FC = () => {
                         Thanks for stopping by! I love exploring new ideas and opportunities, and I’m always open to connecting with others who share similar interests. If any of our hobbies align, please feel free to reach out. I look forward to hearing from you!
                         </p>
                         <div className="flex flex-col items-center">
-                            <a href="mailto:kamal_banjade@icloud.com" className=" mt-8 py-2 px-4 text-lg text-[#64ffda] border-2 border-[#64ffda] rounded transition duration-300 ease-in-out hover:bg-[#64ffda] hover:bg-opacity-10 font-bold hover:-translate-y-1 hover:shadow-lg flex items-center justify-center hover:scale-110">
+                            <a href="mailto:kamal_banjade@icloud.com" className=" mt-8 py-2 px-4 text-lg text-[#64ffda] border-dotted border-2 border-[#64ffda] rounded transition duration-300 ease-in-out hover:bg-[#64ffda] hover:bg-opacity-10 font-bold hover:-translate-y-1 hover:shadow-lg flex items-center justify-center hover:scale-110">
                                 Say Hello! <span className="ml-2"><FaEnvelope /></span>
                             </a>
                             <br />

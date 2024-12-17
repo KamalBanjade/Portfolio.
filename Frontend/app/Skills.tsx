@@ -100,7 +100,7 @@ const Skills: React.FC = () => {
                                 <li>Node.js</li>
                                 <li>Express.js</li>
                                 <li>MongoDB</li>
-                                <li>PostgreSQL</li>
+                                <li>MySQL</li>
                                 <li>RESTful APIs</li>
                             </ul>
                         </div>
